@@ -1,31 +1,35 @@
-// import asyncHandler from 'express-async-handler'
-// import Post from '../models/postModel.js'
+import asyncHandler from 'express-async-handler'
+import Post from '../models/postModel.js'
 // import User from '../models/userModel.js'
-// const mongoose = require('mongoose')
-// const cloudinary = require("../middleware/cloudinary");
+const cloudinary = require("../middleware/cloudinary");
 
 // //@desc     Get posts from all
 // //route     GET / api/posts/
 // //@access   Private
-// const getCommunity = asyncHandler(async (req, res) => {
-//     try {
-//         Post.find().sort({createdAt: -1}).lean().then(posts => res.json(posts))
-//     } catch (err) {
-//         console.log(err)
-//     }
-// })
+const getCommunity = asyncHandler(async (req, res) => {
+    try {
+        const posts = await Post.find().lean()
+        res.json(posts)
+    } catch (err) {
+        console.log(err)
+    }
+})
 
 
 // //@desc     Get post
 // //route     GET / api/posts/:id
 // //@access   Private
-// const getPost = asyncHandler(async (req, res) => {
-//     try {
-//         Post.findById(req.params.id).lean().then(post => res.json(post))
-//     } catch (err) {
-//         console.log(err)
-//     }
-// })
+const getPost = asyncHandler(async (req, res) => {
+    try {
+        const post =  await Post.findById(req.params.id)
+        if(post){
+            res.json(post)
+        }
+    } catch (err) {
+        res.status(404)
+        throw new Error('Post not found')
+    }
+})
 
 
 // //@desc     Create post
