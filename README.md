@@ -1,4 +1,6 @@
 
+![Screenshot](screenshots/anxiety-ally.png)
+
 # Anxiety Ally
 
 Welcome to Anxiety Ally, your safespace mental health application designed to support individuals battling anxiety, agoraphobia and separation anxiety. Anxiety Ally provides help, advice and tips on changing your relationship with anxiety, all for free.
