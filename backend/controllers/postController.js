@@ -1,18 +1,14 @@
 import asyncHandler from 'express-async-handler'
 import Post from '../models/postModel.js'
-// import User from '../models/userModel.js'
+import User from '../models/userModel.js'
 const cloudinary = require("../middleware/cloudinary");
 
 // //@desc     Get posts from all
 // //route     GET / api/posts/
 // //@access   Private
 const getCommunity = asyncHandler(async (req, res) => {
-    try {
-        const posts = await Post.find().lean()
-        res.json(posts)
-    } catch (err) {
-        console.log(err)
-    }
+    const posts = await Post.find().lean()
+    res.json(posts)
 })
 
 
@@ -20,12 +16,10 @@ const getCommunity = asyncHandler(async (req, res) => {
 // //route     GET / api/posts/:id
 // //@access   Private
 const getPost = asyncHandler(async (req, res) => {
-    try {
-        const post =  await Post.findById(req.params.id)
-        if(post){
-            res.json(post)
-        }
-    } catch (err) {
+    const post =  await Post.findById(req.params.id)
+    if(post){
+       return res.json(post)
+    }else {
         res.status(404)
         throw new Error('Post not found')
     }
@@ -36,7 +30,6 @@ const getPost = asyncHandler(async (req, res) => {
 //route     POST / api/posts/createpost
 //@access   Private
 const createPost = asyncHandler(async (req, res) => {
-    try {
         const result = await cloudinary.uploader.upload(req.file.path)
         const newPost = new Post({
             title: req.body.title,
@@ -46,10 +39,8 @@ const createPost = asyncHandler(async (req, res) => {
             likes: 0,
             user: req.user.id,
         })
-        newPost.save().then(post => res.json(post))
-    } catch (err) {
-        throw new Error (err)
-    }
+        const createdPost = await newPost.save()
+        return res.status(201).json(createdPost)
 })
 
 
@@ -70,7 +61,7 @@ const deletePost = asyncHandler(async (req, res) => {
             })
         })
     } catch (err) {
-        res.status(404).json({postnotfound: 'no post found'})
+        return res.status(404).json({postnotfound: 'no post found'})
     }
 })
 
