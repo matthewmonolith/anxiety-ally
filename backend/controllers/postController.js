@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import Post from '../models/postModel.js'
 import User from '../models/userModel.js'
-const cloudinary = require("../middleware/cloudinary");
+import cloudinary from "../middleware/cloudinary.js"
 
 // //@desc     Get posts from all
 // //route     GET / api/posts/

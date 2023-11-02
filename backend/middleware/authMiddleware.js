@@ -13,7 +13,7 @@ const protect = asyncHandler(async (req, res, next) => { //have to be logged in 
 
             req.user = await User.findById(decoded.userId).select('-password') //when grabbing by userid it selects password, we don't want that, so let's remove that
 
-            next
+            next()
         } catch (error) {
             res.status(401)
             throw new Error('Not authorised, invalid token') //token there just not valid
