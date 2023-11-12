@@ -9,12 +9,13 @@ const protect = asyncHandler(async (req, res, next) => { //have to be logged in 
 
     if(token){
         try {
-            const decoded = jwt.verify(token, [process.env.JWT_SECRET]) //has userid in it
+            const decoded = jwt.verify(token, process.env.JWT_SECRET) //has userid in it
 
             req.user = await User.findById(decoded.userId).select('-password') //when grabbing by userid it selects password, we don't want that, so let's remove that
 
             next()
         } catch (error) {
+            console.log(error)
             res.status(401)
             throw new Error('Not authorised, invalid token') //token there just not valid
         }

@@ -8,7 +8,15 @@ export const postsApiSlice = apiSlice.injectEndpoints({ //no fetch or axios, all
         }),
         keepUnusudedDataFor: 5, //value is seconds no milisecs
         }),
+        createProduct: builder.mutation({
+            query: (body) => ({
+                url: POSTS_URL,
+                method: 'POST',
+                body
+            }),
+            invalidatesTags: ['Post']
+        })
     }),
 });
 
-export const {useGetPostsQuery} = postsApiSlice;
+export const {useGetPostsQuery, useCreateProductMutation} = postsApiSlice;

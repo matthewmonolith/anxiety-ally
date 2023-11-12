@@ -5,24 +5,13 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    require: true,
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
   caption: {
     type: String,
     required: true,
   },
-  likes: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    }
-  }],
+  likes: {
+    type: Number,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

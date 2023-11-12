@@ -1,7 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Post from '../models/postModel.js'
 import User from '../models/userModel.js'
-import cloudinary from "../middleware/cloudinary.js"
 
 // //@desc     Get posts from all
 // //route     GET / api/posts/
@@ -15,7 +14,7 @@ const getCommunity = asyncHandler(async (req, res) => {
 // //@desc     Get post
 // //route     GET / api/posts/:id
 // //@access   Private
-const getPost = asyncHandler(async (req, res) => {
+const getPost = async (req, res) => {
     const post =  await Post.findById(req.params.id)
     if(post){
        return res.json(post)
@@ -23,25 +22,29 @@ const getPost = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Post not found')
     }
-})
+}
 
 
 //@desc     Create post
-//route     POST / api/posts/createpost
+//route     POST / api/posts/
 //@access   Private
-const createPost = asyncHandler(async (req, res) => {
-        const result = await cloudinary.uploader.upload(req.file.path)
-        const newPost = new Post({
-            title: req.body.title,
-            image: result.secure_url,
-            cloudinaryId: result.public_id,
-            caption: req.body.caption,
-            likes: 0,
-            user: req.user.id,
-        })
-        const createdPost = await newPost.save()
-        return res.status(201).json(createdPost)
-})
+const createPost = async (req, res) => {
+        
+        try {
+            const newPost = new Post({
+                title: req.body.title,
+                caption: req.body.caption,
+                likes: 0,
+                user: req.user.id,
+            })
+            const createdPost = await newPost.save()
+            return res.status(201).json(createdPost)
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+
+}
 
 
 //@desc     DELETE single post

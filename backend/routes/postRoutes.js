@@ -1,6 +1,5 @@
 import express from 'express';
 const router = express.Router();
-import upload from "../middleware/multer.js";
 
 import {
     getCommunity,
@@ -14,8 +13,8 @@ import {protect} from '../middleware/authMiddleware.js'
 
 
 router.get("/", getCommunity);
-router.get("/:id", getPost);
-router.post("/createPost", protect, upload.single("file"), createPost);
+router.get("/:id", protect, getPost);
+router.post("/", protect, createPost);
 router.delete("/deletePost", protect, deletePost)
 router.post("/like/:id", protect, likePost)
 

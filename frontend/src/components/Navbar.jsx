@@ -220,7 +220,7 @@ const WithSubnavigation = () => {
   }
 
   return (
-    <Box width="100vw" position='fixed' zIndex='999' id='navbar'>
+    <Box width="100vw" zIndex='999' id='navbar'>
       <Flex
         bg={useColorModeValue('steelblue')}
         color={useColorModeValue('gray.600', 'white')}

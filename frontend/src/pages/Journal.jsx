@@ -24,36 +24,39 @@ import {
   Flex,
   Text,
   Center,
-  SimpleGrid
+  SimpleGrid,
+  Stack,
+  Divider
 } from "@chakra-ui/react";
+import {useGetJournalsQuery, useCreateJournalMutation } from '../slices/journalsApiSlice'
 
 const Journal= () => {
-  const [mood, setMood] = useState("");
-  const [journalEntry, setJournalEntry] = useState("");
-  const [gratitude, setGratitude] = useState("");
-  const navbarHeight = useNavbarHeight()
-  const handleSaveJournalEntry = () => {
-    // Handle saving the journal entry to your data storage
-    console.log("Mood:", mood);
-    console.log("Journal Entry:", journalEntry);
-    console.log("Gratitude:", gratitude);
+  const {data: journals, isLoading, error, refetch} = useGetJournalsQuery();
+  const [createJournal] = useCreateJournalMutation();
+
+  const [mood, setMood] = useState('');
+  const [title, setTitle] = useState('');
+  const [caption, setCaption] = useState('');
+  const [intensity, setIntensity] = useState(1)
+
+  const createJournalHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await createJournal({mood, title, caption, intensity});
+      setMood('');
+      setTitle('');
+      setCaption('');
+      setIntensity(1);
+      refetch();
+    } catch (error) {
+      console.error('Error creating journal:', error);
+    }
   };
 
   return (
-    <Flex direction='row' align='center' >
-      <Box paddingTop='100px' width='450px' marginLeft='50px'>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-        preserveAspectRatio="none"
-        style={{ position: "absolute", zIndex: -1 }}
-      >
-        {/* Steel Blue Circles */}
-        {/* <circle cx="20%" cy="30%" r="150" fill="steelblue" opacity='40%'/>
-        <circle cx="80%" cy="70%" r="100" fill="steelblue" opacity='40%'/> */}
-      </svg>
-        <VStack spacing={6} align="start" width="100%">
+    <>
+    <form onSubmit={createJournalHandler}>
+       <VStack spacing={6} align="start" width="100%">
           <Text fontSize={'3xl'}>My Journal</Text>
           <FormControl>
             <FormLabel>Mood:</FormLabel>
@@ -66,11 +69,11 @@ const Journal= () => {
           </FormControl>
 
           <FormControl width="100%">
-            <FormLabel>Journal Entry:</FormLabel>
+            <FormLabel>Journal Title:</FormLabel>
             <Textarea
-              placeholder="Write your thoughts here..."
-              value={journalEntry}
-              onChange={(e) => setJournalEntry(e.target.value)}
+              placeholder="Write a title for your journal post"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               size="lg"
               resize="vertical"
               focusBorderColor="green.500"
@@ -78,15 +81,30 @@ const Journal= () => {
           </FormControl>
 
           <FormControl width="100%">
-            <FormLabel>Gratitude:</FormLabel>
-            <Input
-              placeholder="What are you grateful for today?"
-              value={gratitude}
-              onChange={(e) => setGratitude(e.target.value)}
+            <FormLabel>Journal Entry:</FormLabel>
+            <Textarea
+              placeholder="Write a your journal entry here..."
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
               size="lg"
+              resize="vertical"
               focusBorderColor="green.500"
             />
           </FormControl>
+
+          <FormControl mb="4">
+                <FormLabel>Intensity of emotions:</FormLabel>
+                <Select
+                  value={intensity}
+                  onChange={(e) => setIntensity(parseInt(e.target.value))}
+                >
+                  {Array.from({ length: 10 }, (_, index) => (
+                    <option key={index + 1} value={index + 1}>
+                      {index + 1}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
 
           <Button
               colorScheme={'green'}
@@ -102,30 +120,42 @@ const Journal= () => {
               Save Journal Entry
             </Button>
         </VStack>
+    </form>
+    <Flex direction='row' align='center' >
+      <Box paddingTop='100px' width='450px' marginLeft='50px'>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="none"
+        style={{ position: "absolute", zIndex: -1 }}
+      >
+        {/* Steel Blue Circles */}
+        <circle cx="20%" cy="30%" r="150" fill="steelblue" opacity='40%'/>
+        <circle cx="80%" cy="70%" r="100" fill="steelblue" opacity='40%'/>
+      </svg>
+       
       </Box>
-      <Center width="100%" mt={8}>
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
-              {/* {journalPosts.map((post, index) => (
-                <JournalPost key={index} {...post} />
-              ))} */}
-              <Box p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-                <Text>Date: 2023-10-20</Text>
-                <Text>Mood Here</Text>
-                <Text>Placeholder journal entry text...</Text>
-              </Box>
-              <Box p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-                <Text>Date: 2023-10-20</Text>
-                <Text>Mood Here</Text>
-                <Text>Placeholder journal entry text...</Text>
-              </Box>
-              <Box p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-                <Text>Date: 2023-10-20</Text>
-                <Text>Mood Here</Text>
-                <Text>Placeholder journal entry text...</Text>
-              </Box>
-            </SimpleGrid>
-          </Center>
+          <VStack align="start" spacing="4">
+          {journals ? (
+          journals.map((journal) => (
+            <Box key={journal._id} width="400px" p="4" borderWidth="1px" borderRadius="lg" boxShadow="md">
+              <Text fontSize="xl" fontWeight="bold">{journal.title}</Text>
+              <Text color="gray.600">{journal.caption}</Text>
+              <Text>Mood: {journal.mood}</Text>
+              <Divider my="2" />
+              <Stack direction="row" justify="space-between">
+                <Text>Intensity: {journal.intensity}</Text>
+                <Text color="gray.500">Created At: {new Date(journal.createdAt).toLocaleString()}</Text>
+              </Stack>
+            </Box>
+          ))
+        ) : (
+          <Text>No journals found.</Text>
+        )}
+      </VStack>
     </Flex>
+    </>
   );
 };
 
