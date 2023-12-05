@@ -19,6 +19,7 @@ import {
   useCreateProductMutation,
 } from "../slices/postsApiSlice";
 import CreatePost from "../components/createPost";
+import User from "../../../backend/models/userModel";
 
 const Community = () => {
   const { data: posts, isLoading, error, refetch } = useGetPostsQuery();
@@ -77,6 +78,7 @@ const Community = () => {
             </form>
           </Box>
           <Divider orientation="vertical" mx="4" />
+          {/* <UserInfo /> */}
           <VStack align="start" spacing="4">
             {posts.map((post) => (
               <Box

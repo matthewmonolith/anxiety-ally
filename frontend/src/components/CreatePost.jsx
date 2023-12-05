@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { Box, Heading, Input, Textarea, Button } from '@chakra-ui/react';
+import React, { useState } from "react";
+import { Box, Heading, Input, Textarea, Button } from "@chakra-ui/react";
 
 const CreatePost = ({ onCreatePost }) => {
-  const [title, setTitle] = useState('');
-  const [caption, setCaption] = useState('');
+  const [title, setTitle] = useState("");
+  const [caption, setCaption] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Check if title and caption are not empty
-    if (title.trim() !== '' && caption.trim() !== '') {
+    if (title.trim() !== "" && caption.trim() !== "") {
       // Call the onCreatePost function with the post data
       onCreatePost({ title, caption });
       // Clear the input fields
-      setTitle('');
-      setCaption('');
+      setTitle("");
+      setCaption("");
     }
   };
 

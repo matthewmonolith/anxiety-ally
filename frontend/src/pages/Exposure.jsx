@@ -37,7 +37,7 @@ const Exposure = () => {
         </Text>
       ) : (
         <Flex width="100%" justify="center">
-          <UserInfo />
+          {/* <UserInfo /> */}
           <Box p="4" borderWidth="1px" borderRadius="lg" boxShadow="md">
             <Heading as="h2" mb="4" fontSize="xl">
               Create a New Exposure
