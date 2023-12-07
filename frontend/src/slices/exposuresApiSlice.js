@@ -15,6 +15,13 @@ export const exposureApiSlice = apiSlice.injectEndpoints({
             body
         }),
         invalidatesTags: ['Exposure']
+     }),
+     updateCompletion: builder.mutation({
+        query: (body) => ({
+            url: EXPOSURES_URL,
+            method: 'PUT',
+            body
+        })
      })
     })
 })

@@ -16,6 +16,7 @@ const exposureSchema = new mongoose.Schema({
       completed: {
         type:Boolean,
         required: true,
+        default: false,
       },
       user: {
         type: mongoose.Schema.Types.ObjectId,
