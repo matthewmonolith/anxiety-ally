@@ -41,7 +41,20 @@ const createExposure = async (req, res) => {
     }
 }
 
+const updateCompletion = async (req, res) => {
+    try {
+        await Exposure.findOneAndUpdate(
+            {_id: req.params.id},
+            {completed: !completed},
+            { new: true }
+        )
+    } catch (error) {
+        
+    }
+}
+
 export {
     getExposures,
-    createExposure
+    createExposure,
+    updateCompletion
 }

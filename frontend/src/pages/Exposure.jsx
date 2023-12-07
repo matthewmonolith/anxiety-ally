@@ -20,12 +20,14 @@ import { useNavbarHeight } from "../components/NavbarHeightContext";
 import {
   useGetExposuresQuery,
   useCreateExposureMutation,
+  useUpdateCompletionMutation
 } from "../slices/exposuresApiSlice";
 
 const Exposure = () => {
   const navbarHeight = useNavbarHeight();
   const { data: exposures, isLoading, error, refetch } = useGetExposuresQuery();
   const [createExposure] = useCreateExposureMutation();
+  const [updateCompletion] = useUpdateCompletionMutation();
 
   const [title, setTitle] = useState("");
   const [caption, setCaption] = useState("");
@@ -43,15 +45,14 @@ const Exposure = () => {
     }
   };
 
-  const updateCompletionHandler = async (e) => {
-    e.preventDefault();
+  const updateCompletionHandler = async (exposureId) => {
     try {
-      await updateCompletion({id})
-      refetch()
+      await updateCompletion({ id: exposureId });
+      refetch();
     } catch (error) {
-      console.error("Error updating exposure completion:", error)
+      console.error("Error updating exposure completion:", error);
     }
-  }
+  };
 
   return (
     <Flex
@@ -133,7 +134,7 @@ const Exposure = () => {
                   <Text>
                     {exposure.completed ? "Completed" : "Not Completed"}
                   </Text>
-                  <Button onClick={updateCompletionHandler}>
+                  <Button onClick={() => updateCompletionHandler(exposure._id)}>
                     Toggle Complete
                   </Button>
                   <Text color="gray.500" >
