@@ -46,7 +46,7 @@ const updateCompletion = async (req, res) => {
     await Exposure.findOneAndUpdate(
       { _id: req.params.id },
       {
-        completed: !completed,
+        completed: true,
       }
     );
     console.log("Marked Complete");
