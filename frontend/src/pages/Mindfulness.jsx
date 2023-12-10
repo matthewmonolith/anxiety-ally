@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Heading, Text, Center } from '@chakra-ui/react';
+import { Box, Heading, Text, Center, Flex } from '@chakra-ui/react';
+import './BreathingAnimation.css';
 
 const Mindfulness = () => {
   return (
@@ -7,6 +8,11 @@ const Mindfulness = () => {
       <Heading as="h1" mb="4" textAlign="center" color="teal.500">
         Mindfulness Meditation
       </Heading>
+      <Flex direction="column" align="center">
+        <Center mb="4" padding="20px">
+          <BreathingAnimation />
+        </Center>
+      </Flex>
       <Text fontSize="lg" mb="6">
         In the stillness of this moment, let's embark on a journey of mindfulness meditation. Find a comfortable seat or lie down, allowing your body to settle into a state of ease.
       </Text>
@@ -29,6 +35,12 @@ const Mindfulness = () => {
         When you're ready to return, open your eyes slowly. Take a moment to savor the stillness within you. Carry this mindful awareness with you as you re-engage with the world around you.
       </Text>
     </Box>
+  );
+};
+
+const BreathingAnimation = () => {
+  return (
+    <div className="breathing-circle" />
   );
 };
 

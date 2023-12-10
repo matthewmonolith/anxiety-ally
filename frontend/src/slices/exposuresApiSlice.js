@@ -23,6 +23,12 @@ export const exposureApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
       }),
     }),
+    deleteExposure: builder.mutation({
+      query:({id}) => ({
+        url: `${EXPOSURES_URL}/${id}`,
+        method: "DELETE",
+      })
+    })
   }),
 });
 
@@ -30,4 +36,5 @@ export const {
   useGetExposuresQuery,
   useCreateExposureMutation,
   useUpdateCompletionMutation,
+  useDeleteExposureMutation,
 } = exposureApiSlice;
