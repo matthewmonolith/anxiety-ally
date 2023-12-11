@@ -56,4 +56,15 @@ const updateCompletion = async (req, res) => {
   }
 };
 
-export { getExposures, createExposure, updateCompletion };
+const deleteExposure = async (req, res) => {
+  try {
+    await Exposure.findByIdAndDelete({_id: req.params.id});
+    console.log("Deleted exposure");
+    res.json("Deletion of exposure successful");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export { getExposures, createExposure, updateCompletion, deleteExposure };
