@@ -6,8 +6,7 @@ import {
   Box,
   Text,
   Divider,
-  Stack,
-  VStack,
+  HStack,
   Heading,
   Input,
   Textarea,
@@ -21,7 +20,7 @@ import {
   useGetExposuresQuery,
   useCreateExposureMutation,
   useUpdateCompletionMutation,
-  useDeleteExposureMutation
+  useDeleteExposureMutation,
 } from "../slices/exposuresApiSlice";
 
 const Exposure = () => {
@@ -29,7 +28,7 @@ const Exposure = () => {
   const { data: exposures, isLoading, error, refetch } = useGetExposuresQuery();
   const [createExposure] = useCreateExposureMutation();
   const [updateCompletion] = useUpdateCompletionMutation();
-  const [deleteExposure] = useDeleteExposureMutation(); 
+  const [deleteExposure] = useDeleteExposureMutation();
 
   const [title, setTitle] = useState("");
   const [caption, setCaption] = useState("");
@@ -56,14 +55,14 @@ const Exposure = () => {
     }
   };
 
-  const deleteHandler = async(exposureId) => {
+  const deleteHandler = async (exposureId) => {
     try {
-      await deleteExposure({id: exposureId});
+      await deleteExposure({ id: exposureId });
       refetch();
     } catch (error) {
-      console.error("Error deleting exposure:", error)
+      console.error("Error deleting exposure:", error);
     }
-  }
+  };
 
   return (
     <Flex
@@ -78,7 +77,14 @@ const Exposure = () => {
       ) : (
         <Flex width="100%" justify="center">
           {/* <UserInfo /> */}
-          <Box p="4" borderWidth="1px" borderRadius="lg" boxShadow="md" maxHeight="450px">
+          <Box
+            p="4"
+            borderWidth="1px"
+            borderRadius="lg"
+            boxShadow="md"
+            maxHeight="450px"
+            minWidth="220px"
+          >
             <Heading as="h2" mb="4" fontSize="xl">
               Create a New Exposure
             </Heading>
@@ -123,52 +129,63 @@ const Exposure = () => {
             </form>
           </Box>
           <Divider orientation="vertical" mx="4" />
-          <VStack align="start" spacing="4">
+          <HStack align="start" spacing="4">
             {exposures.map((exposure) => (
               <Box
-              key={exposure._id}
-              width="400px"
-              p="4"
-              borderWidth="1px"
-              borderRadius="lg"
-              boxShadow="md"
-              // backgroundColor={exposure.completed ? "lightgreen" : "white"}
-            >
-              <Text fontSize="2xl" fontWeight="semibold" mb="2">
-                {exposure.title}
-              </Text>
-              <Text color="gray.600" mb="2">
-                {exposure.caption}
-              </Text>
-              <Text color="gray.600" mb="2">
-                Difficulty: {exposure.difficulty}
-              </Text>
-              <Divider my="2" />
-              <Flex justify="space-between" alignItems="center" flexDirection="column" gap="5px">
-                <Text fontSize="sm">
+                key={exposure._id}
+                width="400px"
+                p="4"
+                borderWidth="1px"
+                borderRadius="lg"
+                boxShadow="md"
+                // backgroundColor={exposure.completed ? "lightgreen" : "white"}
+              >
+                <Text
+                  fontSize="lg"
+                  fontWeight="600"
+                  style={{ color: exposure.completed ? "green" : "lightblue" }}
+                >
                   {exposure.completed ? "Completed" : "Not Completed"}
                 </Text>
-                <Button
-                  onClick={() => updateCompletionHandler(exposure._id)}
-                  colorScheme="teal"
-                  size="sm"
-                >
-                  Toggle Complete
-                </Button>
-                <Button
-                  onClick={() => deleteHandler(exposure._id)}
-                  colorScheme="teal"
-                  size="sm"
-                >
-                  Delete Exposure
-                </Button>
-                <Text fontSize="sm" color="gray.500">
-                  Created At: {new Date(exposure.createdAt).toLocaleDateString()}
+
+                <Text fontSize="2xl" fontWeight="semibold" mb="2">
+                  {exposure.title}
                 </Text>
-              </Flex>
-            </Box>            
+                <Text color="gray.600" mb="2">
+                  {exposure.caption}
+                </Text>
+                <Text color="gray.600" mb="2" fontSize="lg" fontWeight="600">
+                  Difficulty: {exposure.difficulty}
+                </Text>
+                <Divider my="2" />
+                <Flex
+                  justify="space-between"
+                  alignItems="center"
+                  flexDirection="column"
+                  gap="5px"
+                >
+                  <Button
+                    onClick={() => updateCompletionHandler(exposure._id)}
+                    colorScheme="teal"
+                    size="sm"
+                  >
+                    Toggle Complete
+                  </Button>
+                  <Button
+                    onClick={() => deleteHandler(exposure._id)}
+                    colorScheme="teal"
+                    size="sm"
+                  >
+                    Delete Exposure
+                  </Button>
+                  <Text fontSize="sm" color="gray.500">
+                    Created At:{" "}
+                    {new Date(exposure.createdAt).toLocaleDateString()}
+                  </Text>
+                </Flex>
+              </Box>
             ))}
-          </VStack>
+          </HStack>
         </Flex>
       )}
     </Flex>
