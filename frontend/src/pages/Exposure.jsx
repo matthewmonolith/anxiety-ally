@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import UserInfo from "../components/UserInfo";
+import SinglePost from "../components/SinglePost.jsx";
 import {
   Flex,
   Box,
@@ -84,6 +84,7 @@ const Exposure = () => {
             boxShadow="md"
             maxHeight="450px"
             minWidth="220px"
+            marginLeft="35px"
           >
             <Heading as="h2" mb="4" fontSize="xl">
               Create a New Exposure
@@ -129,61 +130,14 @@ const Exposure = () => {
             </form>
           </Box>
           <Divider orientation="vertical" mx="4" />
-          <HStack align="start" spacing="4">
+          <HStack align="start" spacing="4" wrap="wrap">
             {exposures.map((exposure) => (
-              <Box
+              <SinglePost
                 key={exposure._id}
-                width="400px"
-                p="4"
-                borderWidth="1px"
-                borderRadius="lg"
-                boxShadow="md"
-                // backgroundColor={exposure.completed ? "lightgreen" : "white"}
-              >
-                <Text
-                  fontSize="lg"
-                  fontWeight="600"
-                  style={{ color: exposure.completed ? "green" : "lightblue" }}
-                >
-                  {exposure.completed ? "Completed" : "Not Completed"}
-                </Text>
-
-                <Text fontSize="2xl" fontWeight="semibold" mb="2">
-                  {exposure.title}
-                </Text>
-                <Text color="gray.600" mb="2">
-                  {exposure.caption}
-                </Text>
-                <Text color="gray.600" mb="2" fontSize="lg" fontWeight="600">
-                  Difficulty: {exposure.difficulty}
-                </Text>
-                <Divider my="2" />
-                <Flex
-                  justify="space-between"
-                  alignItems="center"
-                  flexDirection="column"
-                  gap="5px"
-                >
-                  <Button
-                    onClick={() => updateCompletionHandler(exposure._id)}
-                    colorScheme="teal"
-                    size="sm"
-                  >
-                    Toggle Complete
-                  </Button>
-                  <Button
-                    onClick={() => deleteHandler(exposure._id)}
-                    colorScheme="teal"
-                    size="sm"
-                  >
-                    Delete Exposure
-                  </Button>
-                  <Text fontSize="sm" color="gray.500">
-                    Created At:{" "}
-                    {new Date(exposure.createdAt).toLocaleDateString()}
-                  </Text>
-                </Flex>
-              </Box>
+                exposure={exposure}
+                updateCompletionHandler={updateCompletionHandler}
+                deleteHandler={deleteHandler}
+              />
             ))}
           </HStack>
         </Flex>
