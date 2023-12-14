@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import SinglePost from "../components/SinglePost.jsx";
+import EasyMeditation from "../components/EasyMeditation.jsx";
 import {
   Flex,
   Box,
@@ -65,6 +66,7 @@ const Exposure = () => {
   };
 
   return (
+    <>
     <Flex
       direction="column"
       alignItems="center"
@@ -143,6 +145,8 @@ const Exposure = () => {
         </Flex>
       )}
     </Flex>
+    <EasyMeditation />
+    </>
   );
 };
 

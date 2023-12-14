@@ -1,14 +1,6 @@
 import { useNavbarHeight } from "../components/NavbarHeightContext";
 import React, { useState } from "react";
-// const Journal = () => {
-//   const navbarHeight = useNavbarHeight();
-
-//   return (
-//     <div style={{ paddingTop: `${navbarHeight}px` }}>
-//       <h1>My journal</h1>
-//     </div>
-//   );
-// };
+import EasyMeditation from "../components/EasyMeditation";
 
 import {
   Box,
@@ -192,6 +184,7 @@ const Journal = () => {
           </Flex>
         )}
       </Flex>
+      <EasyMeditation />
     </>
   );
 };
