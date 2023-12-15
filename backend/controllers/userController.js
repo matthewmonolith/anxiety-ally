@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
+import cloudinary from "../middleware/cloudinary"
 
 //@desc     Auth User/Set token
 //route     POST / api/users/auth
@@ -39,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         username,
         email,
-        password
+        password,
     });
 
     if(user){
@@ -104,10 +105,53 @@ const updateUserProfile = asyncHandler(async (req, res) => {
    }
 });
 
+
+//@desc     Update User Bio
+//route     PUT / api/users/profile
+//@access   Private
+const updateUserBio = async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if(user){
+        user.bio = req.body.bio || user.bio
+
+        const updatedUser = await user.save()
+        res.status(200).json({
+          bio: updatedUser.bio
+        })
+
+    }else {
+     res.status(404)
+     throw new Error('user not found')
+    }
+ };
+ 
+
+
+//@desc     Update User PFP
+//route     PUT / api/users/profile
+//@access   Private
+const uploadProfilePic = async (req, res) => {
+    try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      await User.findOneAndUpdate({_id:req.params.id}, {
+        profilePicture: result.secure_url,
+        pfpCloudinaryId: result.public_id
+      });
+      console.log("PFP has been added!");
+      res.status(200);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
 export {
     authUser,
     registerUser,
     logoutUser,
     getUserProfile,
     updateUserProfile,
+    updateUserBio,
+    uploadProfilePic
 };

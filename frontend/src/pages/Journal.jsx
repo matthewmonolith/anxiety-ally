@@ -5,18 +5,13 @@ import EasyMeditation from "../components/EasyMeditation";
 import {
   Box,
   Button,
-  ChakraProvider,
-  Container,
   FormControl,
   FormLabel,
-  Input,
   Select,
   Textarea,
-  VStack,
+  HStack,
   Flex,
   Text,
-  Center,
-  SimpleGrid,
   Stack,
   Divider,
   Heading,
@@ -150,7 +145,7 @@ const Journal = () => {
               </form>
             </Box>
             <Divider orientation="vertical" mx="4" />
-            <VStack align="start" spacing="4">
+            <HStack align="start" spacing="4" wrap="wrap">
               {journals ? (
                 journals.map((journal) => (
                   <Box
@@ -180,7 +175,7 @@ const Journal = () => {
               ) : (
                 <Text>No journals found.</Text>
               )}
-            </VStack>
+            </HStack>
           </Flex>
         )}
       </Flex>

@@ -23,7 +23,7 @@ const ProfileScreen = () => {
     <div style={{ paddingTop: `${navbarHeight}px` }}>
         <Flex direction='row' width='100vw'>
           <UserInfo />
-          <FeedContainer title='My Community Posts'/>
+          {/* <FeedContainer title='My Community Posts'/> */}
         </Flex>
         {/* <Link to='update'> Update Profile?</Link> */}
     </div>
