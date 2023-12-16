@@ -1,8 +1,9 @@
 import { useNavbarHeight } from "../components/NavbarHeightContext";
-import { Link } from 'react-router-dom';
 import UserInfo from '../components/UserInfo'
-import Postcard from "../components/Postcard";
-import FeedContainer from "../components/FeedContainer";
+import { useState, useEffect } from 'react';
+import { useUpdateUserBioMutation } from "../slices/usersApiSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { setCredentials } from '../slices/authSlice';
 import {
 Flex,
 Box,
@@ -16,16 +17,16 @@ GridItem,
 Card
   } from '@chakra-ui/react'
 
+
 const ProfileScreen = () => {
   const navbarHeight = useNavbarHeight();
+  const [bio, setBio] = useState()
 
   return (
     <div style={{ paddingTop: `${navbarHeight}px` }}>
         <Flex direction='row' width='100vw'>
           <UserInfo />
-          {/* <FeedContainer title='My Community Posts'/> */}
         </Flex>
-        {/* <Link to='update'> Update Profile?</Link> */}
     </div>
   );
 };

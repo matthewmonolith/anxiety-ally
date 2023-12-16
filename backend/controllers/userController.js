@@ -88,6 +88,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
    if(user){
     user.username = req.body.username || user.username
     user.email = req.body.email || user.email
+    user.bio = req.body.bio || user.bio
 
     if(req.body.password){
         user.password = req.body.password
@@ -138,7 +139,7 @@ const uploadProfilePic = async (req, res) => {
         profilePicture: result.secure_url,
         pfpCloudinaryId: result.public_id
       });
-      console.log("PFP has been added!");
+      console.log("Profile picture has been added!");
       res.status(200);
     } catch (error) {
       console.log(error)
@@ -152,6 +153,6 @@ export {
     logoutUser,
     getUserProfile,
     updateUserProfile,
-    updateUserBio,
+    // updateUserBio,
     uploadProfilePic
 };
