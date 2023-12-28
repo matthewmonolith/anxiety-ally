@@ -1,7 +1,8 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
-import cloudinary from "../middleware/cloudinary"
+import cloudinary from "../middleware/cloudinary.js"
+
 
 //@desc     Auth User/Set token
 //route     POST / api/users/auth
