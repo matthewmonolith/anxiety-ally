@@ -1,5 +1,5 @@
 import { useNavbarHeight } from "../components/NavbarHeightContext";
-// import UserInfo from '../components/UserInfo'
+import UserInfo from '../components/UserInfo'
 // import { useState, useEffect } from 'react';
 // // import { useUpdateUserBioMutation } from "../slices/usersApiSlice";
 // import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,7 @@ import {
   StackDivider,
   Box,
   Text,
-  Flex
+  Flex,
 } from "@chakra-ui/react";
 
 const ProfileScreen = () => {
@@ -35,40 +35,42 @@ const ProfileScreen = () => {
 
   return (
     <div style={{ paddingTop: `${navbarHeight}px` }}>
-      <Flex>
-        <Card>
-          <CardHeader>
-            <Heading size="md">Client Report</Heading>
-          </CardHeader>
-
-          <CardBody>
-            <Stack divider={<StackDivider />} spacing="4">
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Summary
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  View a summary of all your clients over the last month.
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Overview
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  Check out the overview of your clients.
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Analysis
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  See a detailed analysis of all your business clients.
-                </Text>
-              </Box>
-            </Stack>
-          </CardBody>
+      <Flex justify="center">
+        <Card w="80%">
+          <Flex justify="flex-start">
+            <CardBody>
+              <UserInfo />
+              {/* <Stack divider={<StackDivider />} spacing="4" w="50%">
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    Summary
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    View a summary of all your clients over the last month.
+                  </Text>
+                </Box>
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    Overview
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    Check out the overview of your clients.
+                  </Text>
+                </Box>
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    Analysis
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    See a detailed analysis of all your business clients.
+                  </Text>
+                </Box>
+              </Stack> */}
+            </CardBody>
+          </Flex>
+          {/* <CardHeader>
+            <Heading size="md">User Profile</Heading>
+          </CardHeader> */}
         </Card>
       </Flex>
     </div>
