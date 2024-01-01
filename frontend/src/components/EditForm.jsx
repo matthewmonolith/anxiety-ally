@@ -36,6 +36,13 @@ const EditForm = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
+          <FormControl mb="4">
+            <FormLabel>Update Profile Picture</FormLabel>
+            <Input
+              type="file"
+              placeholder="Profile Picture"
+            />
+          </FormControl>
           <Button type="submit" colorScheme="teal">
             Update Profile
           </Button>
