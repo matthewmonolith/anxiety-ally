@@ -35,7 +35,6 @@ import Journal from './pages/Journal';
 import ProfileScreen from './pages/ProfileScreen';
 import PrivateRoute from './components/PrivateRoute';
 import Community from './pages/Community';
-import UpdateProfile from './pages/UpdateProfile';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,7 +50,6 @@ const router = createBrowserRouter(
           <Route index element={<ProfileScreen />} />
           <Route path="myplan" element={<Exposure />} />
           <Route path="myjournal" element={<Journal />} />
-          <Route path="update" element={<UpdateProfile />}></Route>
         </Route>
         <Route path='/community' element={<Community />} ></Route>
       </Route>

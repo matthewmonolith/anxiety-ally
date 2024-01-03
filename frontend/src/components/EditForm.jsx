@@ -1,70 +1,3 @@
-// import React, { useState } from "react";
-// import {
-//   Box,
-//   FormControl,
-//   FormLabel,
-//   Input,
-//   Textarea,
-//   Button,
-//   Flex,
-//   Center,
-// } from "@chakra-ui/react";
-
-// const EditForm = () => {
-//   const [username, setUsername] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [bio, setBio] = useState("");
-//   return (
-//     <Box>
-//       <Flex direction={"column"} alignItems={"center"}>
-//         <form>
-//           <FormControl mb="4">
-//             <FormLabel>Edit Username</FormLabel>
-//             <Input
-//               type="text"
-//               placeholder="Username..."
-//               value={username}
-//               onChange={(e) => setUsername(e.target.value)}
-//             />
-//           </FormControl>
-
-//           <FormControl mb="4">
-//             <FormLabel>Edit Email:</FormLabel>
-//             <Input
-//               type="email"
-//               placeholder="Email Address..."
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//             />
-//           </FormControl>
-//           <FormControl mb="4">
-//             <FormLabel>Edit Bio:</FormLabel>
-//             <Input
-//               type="email"
-//               placeholder="Your Bio..."
-//               value={bio}
-//               onChange={(e) => setBio(e.target.value)}
-//             />
-//           </FormControl>
-//           <FormControl mb="4">
-//             <FormLabel>Update Profile Picture</FormLabel>
-//             <Input
-//               type="file"
-//               placeholder="Profile Picture"
-//             />
-//           </FormControl>
-//           <Button type="submit" colorScheme="teal">
-//             Update Profile
-//           </Button>
-//         </form>
-//       </Flex>
-//       {/* <form onSubmit={updateUserProfile}> */}
-//     </Box>
-//   );
-// };
-
-"use client";
-
 import {
   Flex,
   Box,
@@ -93,11 +26,13 @@ const EditForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [bio, setBio] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.auth);
+  console.log(userInfo)
 
   const [updateProfile] = useUpdateUserMutation();
 
@@ -109,10 +44,11 @@ const EditForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await UpdateProfile({
+      const res = await updateProfile({
         _id: userInfo._id,
         username,
         email,
+        bio,
         password,
       }).unwrap;
       dispatch(setCredentials({ ...res }));
@@ -123,12 +59,7 @@ const EditForm = () => {
   };
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
+    <Flex minH={"50vh"} align={"center"} justify={"center"}>
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
@@ -146,16 +77,9 @@ const EditForm = () => {
             p={8}
           >
             <Stack spacing={4}>
-              <HStack>
-                {/* <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box> */}
-              </HStack>
+              <HStack></HStack>
               <Box>
-                <FormControl id="username" isRequired onSubmit={submitHandler}>
+                <FormControl id="username" onSubmit={submitHandler}>
                   <FormLabel>Username</FormLabel>
                   <Input
                     type="text"
@@ -165,12 +89,7 @@ const EditForm = () => {
                   />
                 </FormControl>
               </Box>
-              {/* <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl> */}
-
-              <FormControl id="email" isRequired onSubmit={submitHandler}>
+              <FormControl id="email" onSubmit={submitHandler}>
                 <FormLabel>Email address</FormLabel>
                 <Input
                   type="email"
@@ -179,8 +98,17 @@ const EditForm = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormControl>
+              <FormControl id="bio" onSubmit={submitHandler}>
+                <FormLabel>Bio</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Update your bio"
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                />
+              </FormControl>
 
-              <FormControl id="password" isRequired onSubmit={submitHandler}>
+              <FormControl id="password" onSubmit={submitHandler}>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
