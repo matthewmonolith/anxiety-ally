@@ -30,6 +30,7 @@ export default function SignupCard() {
   const[username, setUsername] = useState('')
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
+  const[bio, setBio] = useState('')
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,12 +48,13 @@ export default function SignupCard() {
   const submitHandler = async (e) => {
     e.preventDefault()
     console.log('submitted')
+    console.log(bio)
     try {
-      const res = await register({ username, email, password }).unwrap();
+      const res = await register({ username, email, bio, password }).unwrap();
       dispatch(setCredentials({...res}))
       navigate('/profile')
     } catch (error) {
-      toast.error(err?.data?.message || err.error)
+      toast.error(error?.data?.message || error.error)
     }
   }
 
@@ -108,6 +110,19 @@ export default function SignupCard() {
                 onChange={(e) => setEmail(e.target.value)}
                 />
               </FormControl>
+              
+              <FormControl
+              id="bio"
+              onSubmit={submitHandler}
+              >
+                <FormLabel>Bio</FormLabel>
+                <Input 
+                type="text"
+                placeholder="Would you like to put in a bio?"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                />
+              </FormControl>
 
               <FormControl id="password" isRequired onSubmit={submitHandler}>
                 <FormLabel>Password</FormLabel>
@@ -122,6 +137,7 @@ export default function SignupCard() {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
+
               <Stack spacing={10} pt={2}>
                 <Button
                   loadingText="Submitting"

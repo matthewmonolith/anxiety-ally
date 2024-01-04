@@ -10,9 +10,11 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import EditProfile from "./EditProfile.jsx";
-
+import { useDispatch, useSelector } from 'react-redux'
+// import { getUserDetails, updateUserProfile } from '../actions/userActions' - change this to userapislice to get user info
 export default function SocialProfileSimple() {
-  const [open, setOpen] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
+  console.log(userInfo)
   return (
     <div>
       <Box maxW="sm" borderRadius="lg" overflow="hidden" borderWidth="1px">
@@ -27,14 +29,11 @@ export default function SocialProfileSimple() {
               border: "2px solid white",
             }}
           />
-          <Text>User Name</Text>
+          <Text>{userInfo.username}</Text>
           <Stack>
             <Box p="20px">
               <Text pt="2" fontSize="sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptate cupiditate, non ab libero nulla nihil atque ratione ex
-                voluptas aspernatur rerum recusandae error dolore magni quasi
-                dicta accusamus harum! Voluptatem!
+                {userInfo.bio}
               </Text>
             </Box>
             <Container
