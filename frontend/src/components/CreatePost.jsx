@@ -18,11 +18,17 @@ const CreatePost = ({ onCreatePost }) => {
   };
 
   return (
-    <Box p="4" borderWidth="1px" borderRadius="lg" boxShadow="md">
+    <Box
+      p="4"
+      borderWidth="1px"
+      borderRadius="lg"
+      boxShadow="md"
+      maxHeight="250px"
+    >
       <Heading as="h2" mb="4" fontSize="xl">
         Create a New Post
       </Heading>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={createPostHandler}>
         <Input
           type="text"
           placeholder="Enter post title"

@@ -14,11 +14,10 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { getUserDetails, updateUserProfile } from '../actions/userActions' - change this to userapislice to get user info
 export default function SocialProfileSimple() {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo)
   return (
     <div>
       <Box maxW="sm" borderRadius="lg" overflow="hidden" borderWidth="1px">
-        <VStack>
+        <VStack spacing={"1px"}>
           <Avatar
             size={"xl"}
             marginTop="10px"
@@ -30,7 +29,6 @@ export default function SocialProfileSimple() {
             }}
           />
           <Text>{userInfo.username}</Text>
-          <Stack>
             <Box p="20px">
               <Text pt="2" fontSize="sm">
                 {userInfo.bio}
@@ -43,7 +41,6 @@ export default function SocialProfileSimple() {
             >
               <EditProfile />
             </Container>
-          </Stack>
         </VStack>
       </Box>
     </div>

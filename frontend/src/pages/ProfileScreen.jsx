@@ -1,9 +1,11 @@
 import { useNavbarHeight } from "../components/NavbarHeightContext";
 import UserInfo from '../components/UserInfo'
+import UserPosts from "../components/UserPosts";
 import {
   Card,
   CardBody,
   Flex,
+  Text
 } from "@chakra-ui/react";
 
 const ProfileScreen = () => {
@@ -16,6 +18,7 @@ const ProfileScreen = () => {
           <Flex justify="flex-start">
             <CardBody>
               <UserInfo />
+              <UserPosts />
             </CardBody>
           </Flex>
         </Card>

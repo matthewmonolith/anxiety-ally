@@ -36,10 +36,12 @@ const EditForm = () => {
   const [updateProfile] = useUpdateUserMutation();
 
   useEffect(() => {
-    setUsername(userInfo.username);
-    setEmail(userInfo.email);
-  }, [userInfo.setUsername, userInfo.setEmail]);
-
+    setUsername(userInfo.username || "");
+    setEmail(userInfo.email || "");
+    setBio(userInfo.bio || "");
+  }, [userInfo]);
+  
+  
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -49,7 +51,7 @@ const EditForm = () => {
         email,
         bio,
         password,
-      }).unwrap;
+      }).unwrap();
       dispatch(setCredentials({ ...res }));
       toast.success("Profile updated! :)");
     } catch (err) {
@@ -78,7 +80,7 @@ const EditForm = () => {
             <Stack spacing={4}>
               <HStack></HStack>
               <Box>
-                <FormControl id="username" onSubmit={submitHandler}>
+                <FormControl id="username">
                   <FormLabel>Username</FormLabel>
                   <Input
                     type="text"
@@ -88,7 +90,7 @@ const EditForm = () => {
                   />
                 </FormControl>
               </Box>
-              <FormControl id="email" onSubmit={submitHandler}>
+              <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
                 <Input
                   type="email"
@@ -97,7 +99,8 @@ const EditForm = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormControl>
-              <FormControl id="bio" onSubmit={submitHandler}>
+
+              <FormControl id="bio">
                 <FormLabel>Bio</FormLabel>
                 <Input
                   type="text"
@@ -107,7 +110,7 @@ const EditForm = () => {
                 />
               </FormControl>
 
-              <FormControl id="password" onSubmit={submitHandler}>
+              <FormControl id="password">
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
@@ -128,7 +131,7 @@ const EditForm = () => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <Stack spacing={10} pt={2}>
+              <Stack spacing={5} pt={2}>
                 <Button
                   loadingText="Submitting"
                   size="lg"

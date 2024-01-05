@@ -14,7 +14,7 @@ import {protect} from '../middleware/authMiddleware.js'
 router.post('/', registerUser);
 router.post('/auth', authUser);
 router.post('/logout', logoutUser);
-router.route('/profile').get(protect, getUserProfile);
+router.get('/profile', protect, getUserProfile);
 router.put('/update', protect, updateUserProfile);
 router.put('/users/:id', protect, upload.single("file"), uploadProfilePic);
 

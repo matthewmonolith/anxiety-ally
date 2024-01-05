@@ -18,7 +18,7 @@ import {
   useGetPostsQuery,
   useCreateProductMutation,
 } from "../slices/postsApiSlice";
-import CreatePost from "../components/createPost";
+// import CreatePost from "../components/createPost";
 import User from "../../../backend/models/userModel";
 
 const Community = () => {
@@ -53,7 +53,6 @@ const Community = () => {
         <Text color="red.500">{error?.data?.message || error.error}</Text>
       ) : (
         <Flex width="100%" justify="center">
-          {/* <UserInfo /> */}
           <Box p="4" borderWidth="1px" borderRadius="lg" boxShadow="md" maxHeight="250px">
             <Heading as="h2" mb="4" fontSize="xl">
               Create a New Post
@@ -78,7 +77,6 @@ const Community = () => {
             </form>
           </Box>
           <Divider orientation="vertical" mx="4" />
-          {/* <UserInfo /> */}
           <VStack align="start" spacing="4">
             {posts.map((post) => (
               <Box

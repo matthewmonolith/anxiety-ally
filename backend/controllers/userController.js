@@ -14,10 +14,12 @@ const authUser = asyncHandler(async (req, res) => {
 
     if(user && (await user.matchPassword(password))){
         generateToken(res, user._id);
+        console.log(user)
         res.status(201).json({
             _id: user._id,
             username: user.username,
-            email: user.email
+            email: user.email,
+            bio: user.bio,
         });
     } else {
         res.status(401);
@@ -29,7 +31,7 @@ const authUser = asyncHandler(async (req, res) => {
 //route     POST / api/users
 //@access   Public
 const registerUser = asyncHandler(async (req, res) => {
-    const {username, email, bio, password} = req.body;
+    let {username, email, password} = req.body;
 
     const userExists = await User.findOne({email})
 
@@ -41,7 +43,6 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         username,
         email,
-        bio,
         password,
     });
 
@@ -51,7 +52,6 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user._id,
             username: user.username,
             email: user.email,
-            bio: user.bio
         });
     } else {
         res.status(400);
@@ -74,12 +74,12 @@ const logoutUser = asyncHandler(async (req, res) => {
 //route     GET / api/users/profile
 //@access   Private
 const getUserProfile = asyncHandler(async (req, res) => {
+    console.log("getuserprofilecalled")
     const user = {
         _id: req.user._id,
         username: req.user.username,
         email: req.user.email
     }
-
     res.status(200).json({user});
 });
 
@@ -87,6 +87,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //route     PUT / api/users/profile
 //@access   Private
 const updateUserProfile = asyncHandler(async (req, res) => {
+    console.log("updateduser called")
    const user = await User.findById(req.user._id);
    if(user){
     user.username = req.body.username || user.username
@@ -101,8 +102,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json({
         _id: updatedUser._id,
         username: updatedUser.username,
+        bio: updatedUser.bio,
         email: updatedUser.email
     })
+    console.log(updatedUser)
    }else {
     res.status(404)
     throw new Error('user not found')
@@ -113,21 +116,21 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //@desc     Update User Bio
 //route     PUT / api/users/profile
 //@access   Private
-const updateUserBio = async (req, res) => {
-    const user = await User.findById(req.user._id);
-    if(user){
-        user.bio = req.body.bio || user.bio
+// const updateUserBio = async (req, res) => {
+//     const user = await User.findById(req.user._id);
+//     if(user){
+//         user.bio = req.body.bio || user.bio
 
-        const updatedUser = await user.save()
-        res.status(200).json({
-          bio: updatedUser.bio
-        })
+//         const updatedUser = await user.save()
+//         res.status(200).json({
+//           bio: updatedUser.bio
+//         })
 
-    }else {
-     res.status(404)
-     throw new Error('user not found')
-    }
- };
+//     }else {
+//      res.status(404)
+//      throw new Error('user not found')
+//     }
+//  };
  
 
 
