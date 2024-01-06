@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import { Box, Heading, Input, Textarea, Button } from "@chakra-ui/react";
+import {
+  useCreateProductMutation,
+  useGetPostsQuery,
+} from "../slices/postsApiSlice";
 
-const CreatePost = ({ onCreatePost }) => {
+const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [caption, setCaption] = useState("");
 
-  const handleSubmit = (e) => {
+  const [createPost] = useCreateProductMutation();
+  const { refetch } = useGetPostsQuery();
+
+  const createPostHandler = async (e) => {
     e.preventDefault();
-    // Check if title and caption are not empty
-    if (title.trim() !== "" && caption.trim() !== "") {
-      // Call the onCreatePost function with the post data
-      onCreatePost({ title, caption });
-      // Clear the input fields
+    try {
+      await createPost({ title, caption });
       setTitle("");
       setCaption("");
+      refetch();
+    } catch (error) {
+      console.error("Error creating post:", error);
     }
   };
 
@@ -23,7 +30,9 @@ const CreatePost = ({ onCreatePost }) => {
       borderWidth="1px"
       borderRadius="lg"
       boxShadow="md"
-      maxHeight="250px"
+      maxHeight="450px"
+      maxWidth="250px"
+      marginLeft="35px"
     >
       <Heading as="h2" mb="4" fontSize="xl">
         Create a New Post

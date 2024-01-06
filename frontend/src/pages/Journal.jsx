@@ -70,7 +70,6 @@ const Journal = () => {
           <Text color="red.500">{error?.data?.message || error.error}</Text>
         ) : (
           <Flex width="100%" justify="center" maxHeight="550px">
-            {/* <UserInfo /> */}
             <Box p="4" borderWidth="1px" borderRadius="lg" boxShadow="md">
               <Heading as="h2" mb="4" fontSize="xl">
                 My Journal
