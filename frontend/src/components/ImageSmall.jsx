@@ -1,11 +1,11 @@
 import { Box, Image, Center } from '@chakra-ui/react'
 
-export default function ImageSmall ({size}){
+export default function ImageSmall ({size, src}){
     return (
         <>
         <Center>
             <Box boxSize={size}>
-                <Image src='brainblue.png'></Image>
+                <Image src={src}></Image>
             </Box>
         </Center>
         </>

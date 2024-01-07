@@ -5,12 +5,9 @@ import {
   Card,
   CardBody,
   Flex,
-  Text
 } from "@chakra-ui/react";
-
 const ProfileScreen = () => {
   const navbarHeight = useNavbarHeight();
-
   return (
     <div style={{ paddingTop: `${navbarHeight}px` }}>
       <Flex justify="center">

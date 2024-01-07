@@ -18,7 +18,7 @@ const Calm = () => {
   return (
     <Box p="8" bg="blue.50" borderRadius="md" boxShadow="lg" maxW="600px" mx="auto" mt="10" position="relative">
       <Heading as="h1" mb="4" textAlign="center" color="teal.500">
-        Calm
+        Calming Meditation
       </Heading>
       <Flex direction="column" align="center">
         <Center mb="4" padding="20px">

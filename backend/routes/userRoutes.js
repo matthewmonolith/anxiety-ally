@@ -7,14 +7,15 @@ import { authUser,
     logoutUser,
     getUserProfile,
     uploadProfilePic,
-    updateUserProfile
+    updateUserProfile,
+    getUserPosts
  } from '../controllers/userController.js';
 import {protect} from '../middleware/authMiddleware.js'
 
 router.post('/', registerUser);
 router.post('/auth', authUser);
 router.post('/logout', logoutUser);
-router.get('/profile', protect, getUserProfile);
+router.get('/profile', protect, getUserPosts);
 router.put('/update', protect, updateUserProfile);
 router.put('/users/:id', protect, upload.single("file"), uploadProfilePic);
 

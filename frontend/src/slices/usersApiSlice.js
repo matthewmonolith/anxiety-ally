@@ -10,6 +10,12 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getUserPosts: builder.query({
+      query: () => ({
+        url: `${USERS_URL}/profile`
+      }),
+      keepUnusudedDataFor: 5, //value is seconds no milisecs
+    }),
     logout: builder.mutation({
       query: () => ({
         url: `${USERS_URL}/logout`,
@@ -38,4 +44,5 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useUpdateUserMutation,
+  useGetUserPostsQuery
 } = userApiSlice;

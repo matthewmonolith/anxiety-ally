@@ -71,10 +71,6 @@ const NAV_ITEMS = [
     label: 'FAQ',
     to:'/faq',
   },
-  {
-    label: 'About',
-    to:'/about',
-  }
 ];
 
 const DesktopSubNav = ({ label, to, subLabel }) => {

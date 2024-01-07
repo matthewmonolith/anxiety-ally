@@ -1,9 +1,25 @@
-import React from 'react';
+import React from "react";
+import SinglePost from "./SinglePost";
+import { useGetUserPostsQuery } from "../slices/usersApiSlice";
+import { Flex, Box, Text, Divider, Stack, HStack } from "@chakra-ui/react";
 
 const UserPosts = () => {
+  const { data: posts, isLoading, error } = useGetUserPostsQuery();
+  console.log(posts);
   return (
     <div>
-        <h1>Test</h1>
+      <HStack align="start" spacing="4"></HStack>
+      {isLoading ? (
+        <Text>Loading...</Text>
+      ) : error ? (
+        <Text color="red.500">{error?.data?.message || error.error}</Text>
+      ) : (
+        <HStack align="start" spacing="4" wrap="wrap">
+          {posts.map((post) => (
+            <SinglePost key={post._id} post={post} />
+          ))}
+        </HStack>
+      )}
     </div>
   );
 };

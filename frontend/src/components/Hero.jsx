@@ -5,11 +5,7 @@ import {
   Text,
   Button,
   Stack,
-  Icon,
-  useColorModeValue,
   createIcon,
-  Image,
-  Center
 } from '@chakra-ui/react'
 
 import GridListWith from './Features';
@@ -28,21 +24,14 @@ export default function CallToActionWithAnnotation() {
           paddingTop='150px'
           paddingBottom='20px'
           height='100vh'>
-          <ImageSmall size={'200px'}/>
+          <ImageSmall size={'200px'} src={'brainblue.png'} />
           <Heading
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}>
-              {/* <Text as={'span'} color={'steelblue'} fontSize={'86px'}>
-              Anxiety Ally <br></br>
-            </Text> */}
-
             <Text as={'span'} >
             Overcome anxiety with Anxiety Ally.
             </Text>
-            {/* <Text as={'span'} color={'steelblue'} textDecoration={'underline'}>
-             For free.
-            </Text> */}
           </Heading>
           <Text color={'gray.500'} fontSize='25px'>
            Anxiety Ally is a mental health app designed for people affected by anxiety, agoraphobia and/or separation anxiety. Plan exposures, record your progress and learn mindfulness and meditations to change your relationship with anxiety.

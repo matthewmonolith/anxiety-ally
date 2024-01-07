@@ -23,7 +23,6 @@ import store from './store';
 import { Provider } from 'react-redux'
 import { NavbarHeightProvider } from './components/NavbarHeightContext';
 import Home from './pages/Home';
-import About from './pages/About'
 import NotFound from './pages/NotFound';
 import Meditate from './pages/Meditate';
 import Mindfulness from './pages/Mindfulness';
@@ -40,7 +39,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Home />} />
-      <Route path="about" element={<About />} />
       <Route path="signin" element={<Signin />} />
       <Route path="signup" element={<Signup />} />
 

@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
 import cloudinary from "../middleware/cloudinary.js"
+import Post from '../models/postModel.js'
 
 
 //@desc     Auth User/Set token
@@ -14,7 +15,6 @@ const authUser = asyncHandler(async (req, res) => {
 
     if(user && (await user.matchPassword(password))){
         generateToken(res, user._id);
-        console.log(user)
         res.status(201).json({
             _id: user._id,
             username: user.username,
@@ -31,6 +31,7 @@ const authUser = asyncHandler(async (req, res) => {
 //route     POST / api/users
 //@access   Public
 const registerUser = asyncHandler(async (req, res) => {
+    console.log('register user called')
     let {username, email, password} = req.body;
 
     const userExists = await User.findOne({email})
@@ -74,14 +75,27 @@ const logoutUser = asyncHandler(async (req, res) => {
 //route     GET / api/users/profile
 //@access   Private
 const getUserProfile = asyncHandler(async (req, res) => {
-    console.log("getuserprofilecalled")
-    const user = {
-        _id: req.user._id,
-        username: req.user.username,
-        email: req.user.email
-    }
-    res.status(200).json({user});
+    // console.log('getuserprofile called')
+    // const user = {
+    //     _id: req.user._id,
+    //     username: req.user.username,
+    //     email: req.user.email
+    // }
+    // const posts = await Post.find({ user: req.user._id });
+    // console.log(posts)
+    // res.status(200).json({user, posts});
 });
+
+//@desc     Get user profile
+//route     GET /users/profile
+//@access   Private
+const getUserPosts = asyncHandler(async (req, res) => {
+    console.log('get userposts called')
+    const posts = await Post.find({ user: req.user._id });
+    console.log(posts)
+    res.status(200).json(posts);
+});
+
 
 //@desc     Update User Profile
 //route     PUT / api/users/profile
@@ -160,5 +174,6 @@ export {
     getUserProfile,
     updateUserProfile,
     // updateUserBio,
+    getUserPosts,
     uploadProfilePic
 };
