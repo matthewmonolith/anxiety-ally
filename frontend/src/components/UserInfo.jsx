@@ -16,7 +16,7 @@ export default function SocialProfileSimple() {
   const { userInfo } = useSelector((state) => state.auth);
   return (
     <div>
-      <Box maxW="sm" borderRadius="lg" overflow="hidden" borderWidth="1px">
+      <Box borderRadius="lg" overflow="hidden" borderWidth="1px" width={"250px"} maxWidth={"250px"}>
         <VStack spacing={"1px"}>
           <Avatar
             size={"xl"}
@@ -30,7 +30,7 @@ export default function SocialProfileSimple() {
           />
           <Text>{userInfo.username}</Text>
             <Box p="20px">
-              <Text pt="2" fontSize="sm">
+              <Text pt="2" fontSize="sm" textAlign={"center"}>
                 {userInfo.bio}
               </Text>
             </Box>

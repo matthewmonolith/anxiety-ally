@@ -12,12 +12,12 @@ const ProfileScreen = () => {
     <div style={{ paddingTop: `${navbarHeight}px` }}>
       <Flex justify="center">
         <Card w="80%">
-          <Flex justify="flex-start">
             <CardBody>
+              <Flex>
               <UserInfo />
               <UserPosts />
+              </Flex>
             </CardBody>
-          </Flex>
         </Card>
       </Flex>
     </div>

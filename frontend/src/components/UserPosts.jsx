@@ -1,13 +1,14 @@
 import React from "react";
 import SinglePost from "./SinglePost";
 import { useGetUserPostsQuery } from "../slices/usersApiSlice";
-import { Flex, Box, Text, Divider, Stack, HStack } from "@chakra-ui/react";
+import { Flex, Box, Text, Divider, Stack, HStack, Heading } from "@chakra-ui/react";
 
 const UserPosts = () => {
   const { data: posts, isLoading, error } = useGetUserPostsQuery();
   console.log(posts);
   return (
     <div>
+      <Heading size='xl' marginLeft={"10px"}>Your Posts</Heading>
       <HStack align="start" spacing="4"></HStack>
       {isLoading ? (
         <Text>Loading...</Text>
