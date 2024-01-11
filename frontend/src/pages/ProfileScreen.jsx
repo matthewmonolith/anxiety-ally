@@ -13,7 +13,7 @@ const ProfileScreen = () => {
       <Flex justify="center">
         <Card w="80%">
             <CardBody>
-              <Flex>
+              <Flex gap={"10px"}>
               <UserInfo />
               <UserPosts />
               </Flex>

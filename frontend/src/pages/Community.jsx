@@ -26,8 +26,8 @@ const Community = () => {
       ) : (
         <Flex width="100%" justify="flex-start">
           <CreatePost />
-          <Divider orientation="vertical" mx="4" wrap="wrap" />
-          <HStack align="start" spacing="4">
+          <Divider orientation="vertical" mx="4" />
+          <HStack align="start" spacing="4" wrap="wrap" >
             {posts.map((post) => (
               <SinglePost key={post._id} post={post} />
             ))}

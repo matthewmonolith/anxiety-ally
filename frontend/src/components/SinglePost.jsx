@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Text, Divider, Stack } from '@chakra-ui/react';
+import { Box, Text, Divider, Stack} from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SinglePost = ({ post }) => {
   return (
@@ -10,10 +11,16 @@ const SinglePost = ({ post }) => {
       borderWidth="1px"
       borderRadius="lg"
       boxShadow="md"
+      as={Link}
+      to={`/posts/${post._id}`}
+      _hover={{
+        background:"powderblue",
+        color:"white"
+      }}
     >
-      <Text fontSize="xl" fontWeight="bold">
-        {post.title}
-      </Text>
+        <Text fontSize="xl" fontWeight="bold">
+          {post.title}
+        </Text>
       <Text color="gray.600">{post.caption}</Text>
       <Divider my="2" />
       <Stack direction="row" justify="space-between">
@@ -27,3 +34,4 @@ const SinglePost = ({ post }) => {
 };
 
 export default SinglePost;
+

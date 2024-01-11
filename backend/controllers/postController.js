@@ -6,7 +6,7 @@ import User from '../models/userModel.js'
 // //route     GET / api/posts/
 // //@access   Private
 const getCommunity = asyncHandler(async (req, res) => {
-    const posts = await Post.find().lean()
+    const posts = await Post.find().sort({ createdAt: -1 }).lean();
     res.json(posts)
 })
 

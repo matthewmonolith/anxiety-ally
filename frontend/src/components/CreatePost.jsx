@@ -30,8 +30,8 @@ const CreatePost = () => {
       borderWidth="1px"
       borderRadius="lg"
       boxShadow="md"
-      maxHeight="450px"
-      maxWidth="250px"
+      height="280px"
+      width="250px"
       marginLeft="35px"
     >
       <Heading as="h2" mb="4" fontSize="xl">
