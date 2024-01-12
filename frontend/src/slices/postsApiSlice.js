@@ -10,6 +10,12 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusudedDataFor: 5, //value is seconds no milisecs
     }),
+    getPost: builder.query({
+      query: (id) => ({
+        url: `${POSTS_URL}/${id}`,
+      }),
+      keepUnusudedDataFor: 5, //value is seconds no milisecs
+    }),
     createProduct: builder.mutation({
       query: (body) => ({
         url: POSTS_URL,
@@ -21,4 +27,4 @@ export const postsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetPostsQuery, useCreateProductMutation } = postsApiSlice;
+export const { useGetPostsQuery, useGetPostQuery, useCreateProductMutation } = postsApiSlice;

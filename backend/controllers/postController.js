@@ -17,6 +17,7 @@ const getCommunity = asyncHandler(async (req, res) => {
 const getPost = async (req, res) => {
     const post =  await Post.findById(req.params.id)
     if(post){
+        console.log(post)
        return res.json(post)
     }else {
         res.status(404)

@@ -34,6 +34,7 @@ import Journal from './pages/Journal';
 import ProfileScreen from './pages/ProfileScreen';
 import PrivateRoute from './components/PrivateRoute';
 import Community from './pages/Community';
+import SinglePostPage from './pages/SinglePostPage.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
           <Route path="myjournal" element={<Journal />} />
         </Route>
         <Route path='/community' element={<Community />} ></Route>
+        <Route path='/community/:id' element={<SinglePostPage />} ></Route>
       </Route>
 
       <Route path="meditate">

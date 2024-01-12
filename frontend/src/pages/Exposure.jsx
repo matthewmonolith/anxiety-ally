@@ -51,7 +51,6 @@ const Exposure = () => {
       ) : (
         <Flex width="100%" justify="center">
           <CreateExposure />
-          <Divider orientation="vertical" mx="4" />
           <HStack align="start" spacing="4" wrap="wrap">
             {exposures.map((exposure) => (
               <SingleExposure

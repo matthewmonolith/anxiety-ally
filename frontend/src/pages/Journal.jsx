@@ -33,7 +33,7 @@ const Journal = () => {
         ) : (
           <Flex width="100%" justify="center" maxHeight="550px">
             <CreateJournal />
-            <Divider orientation="vertical" mx="4" />
+            {/* <Divider orientation="vertical" mx="4" /> */}
             <HStack align="start" spacing="4" wrap="wrap">
               {journals ? (
                 journals.map((journal) => (

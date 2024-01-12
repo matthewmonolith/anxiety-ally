@@ -12,7 +12,7 @@ const SinglePost = ({ post }) => {
       borderRadius="lg"
       boxShadow="md"
       as={Link}
-      to={`/posts/${post._id}`}
+      to={`/community/${post._id}`}
       _hover={{
         background:"powderblue",
         color:"white"
