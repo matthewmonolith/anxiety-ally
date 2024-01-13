@@ -15,8 +15,7 @@ export default function EditProfile() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen}>Edit Profile</Button>
-
+      <Button onClick={onOpen} colorScheme="teal">Edit Profile</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

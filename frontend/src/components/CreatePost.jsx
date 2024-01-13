@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Heading, Input, Textarea, Button } from "@chakra-ui/react";
+import { Box, Heading, Input, Textarea, Button, Center } from "@chakra-ui/react";
 import {
   useCreateProductMutation,
   useGetPostsQuery,
@@ -44,16 +44,20 @@ const CreatePost = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           mb="2"
+          required
         />
         <Textarea
           placeholder="Enter post caption"
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
           mb="2"
+          required
         />
+        <Center>
         <Button type="submit" colorScheme="teal">
           Create Post
         </Button>
+        </Center>
       </form>
     </Box>
   );

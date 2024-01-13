@@ -2,12 +2,7 @@ import React from "react";
 import SingleExposure from "../components/SingleExposure.jsx";
 import EasyMeditation from "../components/EasyMeditation.jsx";
 import CreateExposure from "../components/CreateExposure.jsx";
-import {
-  Flex,
-  Text,
-  Divider,
-  HStack,
-} from "@chakra-ui/react";
+import { Flex, Text, HStack, Spinner } from "@chakra-ui/react";
 import { useNavbarHeight } from "../components/NavbarHeightContext";
 import {
   useGetExposuresQuery,
@@ -41,30 +36,35 @@ const Exposure = () => {
 
   return (
     <>
-    <Flex
-      marginTop={`${navbarHeight}px`}
-    >
-      {isLoading ? (
-        <Text>Loading...</Text>
-      ) : error ? (
-        <Text color="red.500">{error?.data?.message || error.error}</Text>
-      ) : (
-        <Flex width="100%" justify="center">
-          <CreateExposure />
-          <HStack align="start" spacing="4" wrap="wrap">
-            {exposures.map((exposure) => (
-              <SingleExposure
-                key={exposure._id}
-                exposure={exposure}
-                updateCompletionHandler={updateCompletionHandler}
-                deleteHandler={deleteHandler}
-              />
-            ))}
-          </HStack>
-        </Flex>
-      )}
-    </Flex>
-    <EasyMeditation />
+      <Flex marginTop={`${navbarHeight}px`} direction="column"
+      alignItems="center">
+        {isLoading ? (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          ></Spinner>
+        ) : error ? (
+          <Text color="red.500">{error?.data?.message || error.error}</Text>
+        ) : (
+          <Flex width="100%" justify="center">
+            <CreateExposure />
+            <HStack align="start" spacing="4" wrap="wrap">
+              {exposures.map((exposure) => (
+                <SingleExposure
+                  key={exposure._id}
+                  exposure={exposure}
+                  updateCompletionHandler={updateCompletionHandler}
+                  deleteHandler={deleteHandler}
+                />
+              ))}
+            </HStack>
+          </Flex>
+        )}
+      </Flex>
+      <EasyMeditation />
     </>
   );
 };

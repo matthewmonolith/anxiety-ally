@@ -8,7 +8,7 @@ import {
   HStack,
   Flex,
   Text,
-  Divider,
+  Spinner
 } from "@chakra-ui/react";
 
 import {
@@ -27,7 +27,13 @@ const Journal = () => {
         marginTop={`${navbarHeight}px`}
       >
         {isLoading ? (
-          <Text>Loading...</Text>
+          <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        ></Spinner>
         ) : error ? (
           <Text color="red.500">{error?.data?.message || error.error}</Text>
         ) : (

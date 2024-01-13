@@ -15,7 +15,7 @@ const EasyMeditation = () => {
         position="fixed"
         bottom="4"
         right="4"
-        colorScheme="teal"
+        colorScheme="blue"
         onClick={handleRedirect}
       >
         Feeling Overwhelmed?

@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import UserInfo from "../components/UserInfo";
-import SinglePost from "../components/SinglePost"
-import { Flex, Box, Text, Divider, Stack, HStack } from "@chakra-ui/react";
+import SinglePost from "../components/SinglePost";
+import { Flex, Text, Divider, HStack, Spinner } from "@chakra-ui/react";
 import { useNavbarHeight } from "../components/NavbarHeightContext";
 import {
   useGetPostsQuery,
@@ -20,14 +20,20 @@ const Community = () => {
       marginTop={`${navbarHeight}px`}
     >
       {isLoading ? (
-        <Text>Loading...</Text>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        ></Spinner>
       ) : error ? (
         <Text color="red.500">{error?.data?.message || error.error}</Text>
       ) : (
         <Flex width="100%" justify="flex-start">
           <CreatePost />
           <Divider orientation="vertical" mx="4" />
-          <HStack align="start" spacing="4" wrap="wrap" >
+          <HStack align="start" spacing="4" wrap="wrap">
             {posts.map((post) => (
               <SinglePost key={post._id} post={post} />
             ))}

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Box, Text, Divider, Stack} from '@chakra-ui/react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Box, Text, Divider, Stack } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SinglePost = ({ post }) => {
   return (
@@ -14,18 +14,18 @@ const SinglePost = ({ post }) => {
       as={Link}
       to={`/community/${post._id}`}
       _hover={{
-        background:"powderblue",
-        color:"white"
+        background: "powderblue",
+        color: "white",
       }}
     >
-        <Text fontSize="xl" fontWeight="bold">
-          {post.title}
-        </Text>
-      <Text color="gray.600">{post.caption}</Text>
+      <Text fontSize="xl" fontWeight="bold">
+        {post.title}
+      </Text>
+      <Text>{post.caption}</Text>
       <Divider my="2" />
       <Stack direction="row" justify="space-between">
         <Text>Likes: {post.likes}</Text>
-        <Text color="gray.500">
+        <Text>
           Created At: {new Date(post.createdAt).toLocaleString()}
         </Text>
       </Stack>
@@ -34,4 +34,3 @@ const SinglePost = ({ post }) => {
 };
 
 export default SinglePost;
-

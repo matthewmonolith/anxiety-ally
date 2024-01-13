@@ -7,6 +7,7 @@ import {
   Select,
   Textarea,
   Button,
+  Center,
 } from "@chakra-ui/react";
 import {
   useGetJournalsQuery,
@@ -38,7 +39,7 @@ const CreateJournal = () => {
   return (
     <Box p="4" borderWidth="1px" borderRadius="lg" boxShadow="md">
       <Heading as="h2" mb="4" fontSize="xl">
-        My Journal
+        Create a new Journal Entry
       </Heading>
       <form onSubmit={createJournalHandler}>
         <FormControl mb="4">
@@ -47,7 +48,7 @@ const CreateJournal = () => {
             placeholder="Select mood"
             value={mood}
             onChange={(e) => setMood(e.target.value)}
-            focusBorderColor="green.500"
+            required
           >
             <option value="happy">Happy</option>
             <option value="sad">Sad</option>
@@ -64,7 +65,7 @@ const CreateJournal = () => {
             onChange={(e) => setTitle(e.target.value)}
             size="lg"
             resize="vertical"
-            focusBorderColor="green.500"
+            required
           />
         </FormControl>
 
@@ -76,7 +77,7 @@ const CreateJournal = () => {
             onChange={(e) => setCaption(e.target.value)}
             size="lg"
             resize="vertical"
-            focusBorderColor="green.500"
+            required
           />
         </FormControl>
         <FormControl mb="4">
@@ -92,21 +93,11 @@ const CreateJournal = () => {
             ))}
           </Select>
         </FormControl>
-
-        <Button
-          colorScheme={"green"}
-          bg={"steelblue"}
-          rounded={"full"}
-          px={6}
-          fontSize="15px"
-          padding="20px"
-          type="submit"
-          _hover={{
-            bg: "green.500",
-          }}
-        >
-          Save Journal Entry
-        </Button>
+        <Center>
+          <Button type="submit" colorScheme="teal">
+            Create Journal Entry
+          </Button>
+        </Center>
       </form>
     </Box>
   );

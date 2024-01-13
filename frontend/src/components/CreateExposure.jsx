@@ -8,11 +8,12 @@ import {
   Textarea,
   Select,
   Button,
+  Center
 } from "@chakra-ui/react"; // Adjust the import path based on your project structure
 import {
-    useGetExposuresQuery,
-    useCreateExposureMutation,
-  } from "../slices/exposuresApiSlice";
+  useGetExposuresQuery,
+  useCreateExposureMutation,
+} from "../slices/exposuresApiSlice";
 
 const CreateExposure = () => {
   const [title, setTitle] = useState("");
@@ -44,7 +45,7 @@ const CreateExposure = () => {
       marginLeft="35px"
     >
       <Heading as="h2" mb="4" fontSize="xl">
-        Create a New Exposure
+        Create a New Exposure Task
       </Heading>
       <form onSubmit={createExposureHandler}>
         <FormControl mb="4">
@@ -54,6 +55,7 @@ const CreateExposure = () => {
             placeholder="Enter exposure title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            required
           />
         </FormControl>
 
@@ -63,6 +65,7 @@ const CreateExposure = () => {
             placeholder="Enter exposure caption"
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
+            required
           />
         </FormControl>
 
@@ -79,10 +82,11 @@ const CreateExposure = () => {
             ))}
           </Select>
         </FormControl>
-
-        <Button type="submit" colorScheme="teal">
-          Create Exposure
-        </Button>
+        <Center>
+          <Button type="submit" colorScheme="teal">
+            Create Exposure
+          </Button>
+        </Center>
       </form>
     </Box>
   );
