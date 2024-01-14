@@ -72,7 +72,7 @@ const SinglePost = ({ exposure, updateCompletionHandler, deleteHandler }) => {
           colorScheme="teal"
           size="sm"
         >
-          Toggle Complete
+          Complete
         </Button>
         <Button
           onClick={() => deleteHandler(exposure._id)}

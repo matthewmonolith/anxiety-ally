@@ -2,7 +2,15 @@ import React from "react";
 import SingleExposure from "../components/SingleExposure.jsx";
 import EasyMeditation from "../components/EasyMeditation.jsx";
 import CreateExposure from "../components/CreateExposure.jsx";
-import { Flex, Text, HStack, Spinner } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  HStack,
+  Spinner,
+  Card,
+  CardBody,
+  Center,
+} from "@chakra-ui/react";
 import { useNavbarHeight } from "../components/NavbarHeightContext";
 import {
   useGetExposuresQuery,
@@ -36,9 +44,9 @@ const Exposure = () => {
 
   return (
     <>
-      <Flex marginTop={`${navbarHeight}px`} direction="column"
-      alignItems="center">
-        {isLoading ? (
+      {isLoading ? (
+        <Flex justifyContent="center" alignItems="center" height="80vh">
+          {" "}
           <Spinner
             thickness="4px"
             speed="0.65s"
@@ -46,24 +54,28 @@ const Exposure = () => {
             color="blue.500"
             size="xl"
           ></Spinner>
-        ) : error ? (
-          <Text color="red.500">{error?.data?.message || error.error}</Text>
-        ) : (
-          <Flex width="100%" justify="center">
-            <CreateExposure />
-            <HStack align="start" spacing="4" wrap="wrap">
-              {exposures.map((exposure) => (
-                <SingleExposure
-                  key={exposure._id}
-                  exposure={exposure}
-                  updateCompletionHandler={updateCompletionHandler}
-                  deleteHandler={deleteHandler}
-                />
-              ))}
-            </HStack>
-          </Flex>
-        )}
-      </Flex>
+        </Flex>
+      ) : error ? (
+        <Text color="red.500">{error?.data?.message || error.error}</Text>
+      ) : (
+        <Flex justify="center" marginTop={`${navbarHeight}px`}>
+          <Card w="80%">
+            <CardBody>
+              <Flex gap={"10px"} align={"flex-start"}>
+                <CreateExposure />
+                {exposures.map((exposure) => (
+                  <SingleExposure
+                    key={exposure._id}
+                    exposure={exposure}
+                    updateCompletionHandler={updateCompletionHandler}
+                    deleteHandler={deleteHandler}
+                  />
+                ))}
+              </Flex>
+            </CardBody>
+          </Card>
+        </Flex>
+      )}
       <EasyMeditation />
     </>
   );

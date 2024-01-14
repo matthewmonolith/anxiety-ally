@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import UserInfo from "../components/UserInfo";
 import SinglePost from "../components/SinglePost";
+import EasyMeditation from "../components/EasyMeditation";
 import { Flex, Text, Divider, HStack, Spinner } from "@chakra-ui/react";
 import { useNavbarHeight } from "../components/NavbarHeightContext";
 import {
@@ -14,6 +15,7 @@ const Community = () => {
   const navbarHeight = useNavbarHeight();
 
   return (
+    <>
     <Flex
       direction="column"
       alignItems="center"
@@ -41,6 +43,8 @@ const Community = () => {
         </Flex>
       )}
     </Flex>
+    <EasyMeditation />
+    </>
   );
 };
 

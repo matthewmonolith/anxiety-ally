@@ -31,7 +31,7 @@ const CreatePost = () => {
       borderRadius="lg"
       boxShadow="md"
       height="280px"
-      width="250px"
+      width="300px"
       marginLeft="35px"
     >
       <Heading as="h2" mb="4" fontSize="xl">
