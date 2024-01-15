@@ -7,7 +7,6 @@ import { Flex, Text, Divider, HStack, Spinner } from "@chakra-ui/react";
 import { useNavbarHeight } from "../components/NavbarHeightContext";
 import {
   useGetPostsQuery,
-  // useCreateProductMutation,
 } from "../slices/postsApiSlice";
 import CreatePost from "../components/createPost";
 const Community = () => {

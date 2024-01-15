@@ -7,20 +7,7 @@ const ProfileScreen = () => {
   const navbarHeight = useNavbarHeight();
   const { isLoading, error} = useGetUserPostsQuery();
   return (
-    // <Flex style={{ paddingTop: `${navbarHeight}px` }} alignItems={"flex-start"}>
-    //   <Flex justify="center">
-    //     <Card w="80%">
-    //         <CardBody>
-    //           <Flex gap={"10px"}>
-    //
-    //           </Flex>
-    //         </CardBody>
-    //     </Card>
-    //   </Flex>
-    // </Flex>
     <>
-      {/* <Flex
-     alignItems={"flex-start"}   */}
       {isLoading ? (
         <Flex justifyContent="center" alignItems="center" height="80vh">
           {" "}
@@ -46,7 +33,7 @@ const ProfileScreen = () => {
           </Card>
         </Flex>
       )}
-      {/* </Flex> */}
+
     </>
   );
 };

@@ -51,23 +51,32 @@ const createPost = async (req, res) => {
 //@desc     DELETE single post
 //route     DELETE / api/posts/:id
 //@access   Private
-const deletePost = asyncHandler(async (req, res) => {
-    try {
-        User.findOne({  user: req.user.id }).then(user => {
-            Post.findById(req.params.id).then(post => {
-                //check post's owner
-                if(post.user.toString() !== req.user.id){ //note user not a string, so need to convert to string
-                    return res.status(401).json({notauthorised: 'user not authorised'})
-                }
+// const deletePost = asyncHandler(async (req, res) => {
+//     try {
+//         User.findOne({  user: req.user.id }).then(user => {
+//             Post.findById(req.params.id).then(post => {
+//                 //check post's owner
+//                 if(post.user.toString() !== req.user.id){ //note user not a string, so need to convert to string
+//                     return res.status(401).json({notauthorised: 'user not authorised'})
+//                 }
     
-                //delete
-                post.remove().then(() => res.json({success: true}))
-            })
-        })
-    } catch (err) {
-        return res.status(404).json({postnotfound: 'no post found'})
+//                 //delete
+//                 post.remove().then(() => res.json({success: true}))
+//             })
+//         })
+//     } catch (err) {
+//         return res.status(404).json({postnotfound: 'no post found'})
+//     }
+// })
+const deletePost = async (req, res) => {
+    try {
+      await Post.findByIdAndDelete({_id: req.params.id});
+      console.log("Deleted post");
+      res.json("Deletion of post successful");
+    } catch (error) {
+      console.log(error);
     }
-})
+  };
 
 //@desc     Like single post
 //route     POST / api/posts/:id

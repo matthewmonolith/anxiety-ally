@@ -1,38 +1,82 @@
-import { useGetPostQuery } from "../slices/postsApiSlice";
+import {
+  useDeletePostMutation,
+  useGetPostQuery,
+} from "../slices/postsApiSlice";
 import {
   Card,
   Heading,
   Text,
   Spinner,
   VStack,
-  HStack,
+  Button,
+  CardBody,
+  Flex,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
-import {DeleteIcon} from "@chakra-ui/icons"
 import { Icon } from "@chakra-ui/react";
-
+import { useNavbarHeight } from "../components/NavbarHeightContext";
+import EasyMeditation from "../components/EasyMeditation";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const SinglePostPage = () => {
   const { id } = useParams();
   const { data: post, isLoading, error } = useGetPostQuery(id);
+  const [deletePost] = useDeletePostMutation();
+  const navbarHeight = useNavbarHeight();
+  const { userInfo } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const deleteHandler = async (postId) => {
+    try {
+      await deletePost({ id: postId });
+      navigate("/community");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
 
   return (
-    <VStack spacing={4} align="center">
-      {isLoading && <Spinner size="xl" />}
-      {error && <Text color="red.500">Error: {error.message}</Text>}
-      {post && (
-        <Card maxW="xl" p={6}>
-          <Heading mb={4}>{post.title}</Heading>
-          <Text>{post.caption}</Text>
-          <Text>{post.comments}</Text>
-          <Text>Likes: {post.likes}</Text>
-          <HStack spacing={'70%'}>
-            <Icon as={FcLike} w={7} h={7} cursor={"pointer"} />
-            <Icon  as={DeleteIcon} w={7} h={7} cursor={"pointer"}/>
-          </HStack>
-        </Card>
-      )}
-    </VStack>
+    <>
+      <VStack spacing={4} align="center" marginTop={`${navbarHeight}px`}>
+        {isLoading && <Spinner size="xl" />}
+        {error && <Text color="red.500">Error: {error.message}</Text>}
+        {post && (
+          <Card maxW="xl" p={6}>
+            <CardBody>
+              <Flex direction={"column"}>
+                <Heading mb={4}>{post.title}</Heading>
+                <Text>{post.caption}</Text>
+                <Text>{post.comments}</Text>
+                <Text fontSize={"xl"} fontWeight={"700"}>
+                  Likes: {post.likes}
+                </Text>
+                <Flex justifyContent={"space-between"}>
+                  <Icon
+                    as={FcLike}
+                    w={7}
+                    h={7}
+                    cursor={"pointer"}
+                    onClick={() => likePost(post._id)}
+                  />
+                  {post.user === userInfo._id && (
+                    <Button
+                      onClick={() => deleteHandler(post._id)}
+                      colorScheme="teal"
+                      size="sm"
+                    >
+                      Delete Post
+                    </Button>
+                  )}
+                </Flex>
+              </Flex>
+            </CardBody>
+          </Card>
+        )}
+      </VStack>
+
+      <EasyMeditation />
+    </>
   );
 };
 

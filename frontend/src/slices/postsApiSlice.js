@@ -14,7 +14,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `${POSTS_URL}/${id}`,
       }),
-      keepUnusudedDataFor: 5, //value is seconds no milisecs
+      keepUnusudedDataFor: 5,
     }),
     createProduct: builder.mutation({
       query: (body) => ({
@@ -24,7 +24,24 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Post"],
     }),
+    deletePost: builder.mutation({
+      query: ({ id }) => ({
+        url: `${POSTS_URL}/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    likePost: builder.mutation({
+      query: ({id}) => ({
+        url: `${POSTS_URL}/${id}`,
+        method: "POST"
+      })
+    })
   }),
 });
 
-export const { useGetPostsQuery, useGetPostQuery, useCreateProductMutation } = postsApiSlice;
+export const {
+  useGetPostsQuery,
+  useGetPostQuery,
+  useCreateProductMutation,
+  useDeletePostMutation,
+} = postsApiSlice;

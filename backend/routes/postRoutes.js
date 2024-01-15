@@ -15,7 +15,7 @@ import {protect} from '../middleware/authMiddleware.js'
 router.get("/", getCommunity);
 router.get("/:id", protect, getPost);
 router.post("/", protect, createPost);
-router.delete("/deletePost", protect, deletePost)
+router.delete("/:id", protect, deletePost)
 router.post("/like/:id", protect, likePost)
 
 export default router;
