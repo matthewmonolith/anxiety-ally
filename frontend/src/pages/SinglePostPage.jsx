@@ -1,6 +1,7 @@
 import {
   useDeletePostMutation,
   useGetPostQuery,
+  useLikePostMutation,
 } from "../slices/postsApiSlice";
 import {
   Card,
@@ -21,8 +22,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const SinglePostPage = () => {
   const { id } = useParams();
-  const { data: post, isLoading, error } = useGetPostQuery(id);
+  const { data: post, isLoading, error, refetch } = useGetPostQuery(id);
   const [deletePost] = useDeletePostMutation();
+  const [likePost] = useLikePostMutation();
   const navbarHeight = useNavbarHeight();
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -33,6 +35,15 @@ const SinglePostPage = () => {
       navigate("/community");
     } catch (error) {
       console.error("Error deleting post:", error);
+    }
+  };
+
+  const likeHandler = async (postId) => {
+    try {
+      await likePost({ id: postId });
+      refetch();
+    } catch (error) {
+      console.log("Error liking post:", error);
     }
   };
 
@@ -57,7 +68,7 @@ const SinglePostPage = () => {
                     w={7}
                     h={7}
                     cursor={"pointer"}
-                    onClick={() => likePost(post._id)}
+                    onClick={() => likeHandler(post._id)}
                   />
                   {post.user === userInfo._id && (
                     <Button

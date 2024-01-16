@@ -31,7 +31,7 @@ const authUser = asyncHandler(async (req, res) => {
 //route     POST / api/users
 //@access   Public
 const registerUser = asyncHandler(async (req, res) => {
-    console.log('register user called')
+    // console.log('register user called')
     let {username, email, password} = req.body;
 
     const userExists = await User.findOne({email})
@@ -101,7 +101,7 @@ const getUserPosts = asyncHandler(async (req, res) => {
 //route     PUT / api/users/profile
 //@access   Private
 const updateUserProfile = asyncHandler(async (req, res) => {
-    console.log("updateduser called")
+    // console.log("updateduser called")
    const user = await User.findById(req.user._id);
    if(user){
     user.username = req.body.username || user.username
@@ -119,7 +119,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         bio: updatedUser.bio,
         email: updatedUser.email
     })
-    console.log(updatedUser)
+    // console.log(updatedUser)
    }else {
     res.status(404)
     throw new Error('user not found')

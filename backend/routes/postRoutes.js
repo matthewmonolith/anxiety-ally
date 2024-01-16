@@ -16,6 +16,6 @@ router.get("/", getCommunity);
 router.get("/:id", protect, getPost);
 router.post("/", protect, createPost);
 router.delete("/:id", protect, deletePost)
-router.post("/like/:id", protect, likePost)
+router.put("/:id", protect, likePost)
 
 export default router;

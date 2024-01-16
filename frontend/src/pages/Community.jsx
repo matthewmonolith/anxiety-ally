@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UserInfo from "../components/UserInfo";
 import SinglePost from "../components/SinglePost";
 import EasyMeditation from "../components/EasyMeditation";
@@ -10,9 +10,12 @@ import {
 } from "../slices/postsApiSlice";
 import CreatePost from "../components/createPost";
 const Community = () => {
-  const { data: posts, isLoading, error } = useGetPostsQuery();
+  const { data: posts, isLoading, error, refetch } = useGetPostsQuery();
   const navbarHeight = useNavbarHeight();
-
+  useEffect(() => {
+    console.log("community loaded")
+    refetch()
+  }, [])
   return (
     <>
     <Flex
