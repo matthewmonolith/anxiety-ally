@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({ baseUrl: ''});//empty cos proxy
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTypes: ['User', 'Post', 'Exposure', 'Journal'],
+  tagTypes: ['User', 'Post', 'Exposure', 'Journal', 'Comment'],
   endpoints: (builder) => ({}),
 });
 

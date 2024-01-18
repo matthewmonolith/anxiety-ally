@@ -1,17 +1,6 @@
 import Exposure from "../models/exposureModel.js";
 import User from "../models/userModel.js";
-
-// module.exports = {
-//     getExposures: async (req, res) => {
-//         try {
-//           const exposures = await Exposure.find({ user: req.user.id });
-//           res.json(exposures);
-//         } catch (err) {
-//           console.log(err);
-//         }
-//       },
-
-// }
+import { body, validationResult } from "express-validator";
 
 const getExposures = async (req, res) => {
   try {
@@ -25,6 +14,16 @@ const getExposures = async (req, res) => {
 };
 
 const createExposure = async (req, res) => {
+  console.log(req.body)
+  await body("title").trim().escape().notEmpty().run(req);
+  await body("caption").trim().escape().notEmpty().run(req);
+  await body("difficulty").isNumeric().run(req);
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const newExposure = new Exposure({
       title: req.body.title,

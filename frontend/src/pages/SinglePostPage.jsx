@@ -12,6 +12,7 @@ import {
   Button,
   CardBody,
   Flex,
+  Center,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
@@ -20,6 +21,9 @@ import { useNavbarHeight } from "../components/NavbarHeightContext";
 import EasyMeditation from "../components/EasyMeditation";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import AddComment from "../components/AddComment";
+import CommentStack from "../components/CommentStack";
+
 const SinglePostPage = () => {
   const { id } = useParams();
   const { data: post, isLoading, error, refetch } = useGetPostQuery(id);
@@ -57,7 +61,7 @@ const SinglePostPage = () => {
             <CardBody>
               <Flex direction={"column"}>
                 <Heading mb={4}>{post.title}</Heading>
-                <Text>{post.caption}</Text>
+                <Text fontSize={"xl"}>{post.caption}</Text>
                 <Text>{post.comments}</Text>
                 <Text fontSize={"xl"} fontWeight={"700"}>
                   Likes: {post.likes}
@@ -65,8 +69,8 @@ const SinglePostPage = () => {
                 <Flex justifyContent={"space-between"}>
                   <Icon
                     as={FcLike}
-                    w={7}
-                    h={7}
+                    w={9}
+                    h={9}
                     cursor={"pointer"}
                     onClick={() => likeHandler(post._id)}
                   />
@@ -84,6 +88,10 @@ const SinglePostPage = () => {
             </CardBody>
           </Card>
         )}
+        <CommentStack />
+        <Center>
+          <AddComment />
+        </Center>
       </VStack>
 
       <EasyMeditation />
