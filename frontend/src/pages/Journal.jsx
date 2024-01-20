@@ -6,11 +6,21 @@ import SingleJournal from "../components/SingleJournal";
 
 import { Card, CardBody, Flex, Text, Spinner } from "@chakra-ui/react";
 
-import { useGetJournalsQuery } from "../slices/journalsApiSlice";
+import { useDeleteJournalMutation, useGetJournalsQuery } from "../slices/journalsApiSlice";
 
 const Journal = () => {
-  const { data: journals, isLoading, error } = useGetJournalsQuery();
+  const { data: journals, isLoading, error, refetch } = useGetJournalsQuery();
+  const [deleteJournal] = useDeleteJournalMutation();
   const navbarHeight = useNavbarHeight();
+
+  const deleteHandler = async (journalId) => {
+    try {
+      await deleteJournal({ id: journalId });
+      refetch();
+    } catch (error) {
+      console.error("Error deleting journal:", error);
+    }
+  };
 
   return (
     <>
@@ -35,7 +45,7 @@ const Journal = () => {
               <CreateJournal />
               {journals ? (
               journals.map((journal) => (
-                <SingleJournal key={journal._id} journal={journal} />
+                <SingleJournal key={journal._id} journal={journal} deleteHandler={deleteHandler} />
               ))
             ) : (
               <Text>No journals found.</Text>

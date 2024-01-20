@@ -8,33 +8,35 @@
 //     <App />
 //   </React.StrictMode>,
 // )
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App.jsx';
-import { 
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import {
   BrowserRouter,
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
- } from 'react-router-dom'
-import store from './store';
-import { Provider } from 'react-redux'
-import { NavbarHeightProvider } from './components/NavbarHeightContext';
-import Home from './pages/Home';
-import NotFound from './pages/NotFound';
-import Meditate from './pages/Meditate';
-import Mindfulness from './pages/Mindfulness';
-import Calm from './pages/Calm';
-import Signin from './pages/Signin'
-import Signup from './pages/Signup'
-import Exposure from './pages/Exposure';
-import Journal from './pages/Journal';
-import ProfileScreen from './pages/ProfileScreen';
-import PrivateRoute from './components/PrivateRoute';
-import Community from './pages/Community';
-import SinglePostPage from './pages/SinglePostPage.jsx';
+  RouterProvider,
+} from "react-router-dom";
+import store from "./store";
+import { Provider } from "react-redux";
+import { NavbarHeightProvider } from "./components/NavbarHeightContext";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Meditate from "./pages/Meditate";
+import Mindfulness from "./pages/Mindfulness";
+import Calm from "./pages/Calm";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Exposure from "./pages/Exposure";
+import Journal from "./pages/Journal";
+import ProfileScreen from "./pages/ProfileScreen";
+import PrivateRoute from "./components/PrivateRoute";
+import Community from "./pages/Community";
+import SinglePostPage from "./pages/SinglePostPage.jsx";
+import Faq from "./pages/Faq.jsx";
+import Resources from "./pages/Resources.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,16 +44,17 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="signin" element={<Signin />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="faq" element={<Faq />} />
+      <Route path="help" element={<Resources />} />
 
-
-      <Route path='' element={<PrivateRoute />}>
+      <Route path="" element={<PrivateRoute />}>
         <Route path="profile">
           <Route index element={<ProfileScreen />} />
           <Route path="myplan" element={<Exposure />} />
           <Route path="myjournal" element={<Journal />} />
         </Route>
-        <Route path='/community' element={<Community />} ></Route>
-        <Route path='/community/:id' element={<SinglePostPage />} ></Route>
+        <Route path="/community" element={<Community />}></Route>
+        <Route path="/community/:id" element={<SinglePostPage />}></Route>
       </Route>
 
       <Route path="meditate">
@@ -59,14 +62,12 @@ const router = createBrowserRouter(
         <Route path="mindfulness" element={<Mindfulness />} />
         <Route path="calm" element={<Calm />} />
       </Route>
-      <Route path='*' element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
 
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <React.StrictMode>
       <NavbarHeightProvider>
@@ -75,10 +76,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </React.StrictMode>
   </Provider>
 );
-
-
-
-
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(

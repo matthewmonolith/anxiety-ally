@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Post from "../models/postModel.js";
 import User from "../models/userModel.js";
+import Comment from "../models/commentModel.js";
 
 // //@desc     Get posts from all
 // //route     GET / api/posts/
@@ -49,8 +50,9 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     await Post.findByIdAndDelete({ _id: req.params.id });
+    await Comment.deleteMany({ post: req.params.id });
     console.log("Deleted post");
-    res.json("Deletion of post successful");
+    res.json("Deletion of post and comments successful");
   } catch (error) {
     console.log(error);
   }

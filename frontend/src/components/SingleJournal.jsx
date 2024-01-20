@@ -1,12 +1,7 @@
 import React from "react";
-import {
-    Box,
-    Stack,
-    Text,
-    Divider,
-  } from "@chakra-ui/react";
+import { Box, Stack, Text, Divider, Flex, Button } from "@chakra-ui/react";
 
-const SingleJournal = ({ journal }) => {
+const SingleJournal = ({ journal, deleteHandler }) => {
   const getBackgroundColor = (mood) => {
     switch (mood) {
       case "happy":
@@ -42,6 +37,21 @@ const SingleJournal = ({ journal }) => {
           Created At: {new Date(journal.createdAt).toLocaleString()}
         </Text>
       </Stack>
+      <Flex
+        justify="space-between"
+        alignItems="center"
+        flexDirection="column"
+        gap="5px"
+      >
+        <Button
+          onClick={() => deleteHandler(journal._id)}
+          colorScheme="teal"
+          size="sm"
+          marginTop={"10px"}
+        >
+          Delete Journal
+        </Button>
+      </Flex>
     </Box>
   );
 };

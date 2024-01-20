@@ -3,16 +3,15 @@ const router = express.Router();
 
 import {
     getJournal,
-    createJournal
+    createJournal,
+    deleteJournal
 } from '../controllers/journalController.js'
 
 import {protect} from '../middleware/authMiddleware.js'
 
 
 router.get("/", protect, getJournal);
-// router.get("/:id", protect, getPost);
 router.post("/", protect, createJournal);
-// router.delete("/", protect, deleteExposure);
-// router.post("/like/:id", protect, likeExposure);
+router.delete("/:id", protect, deleteJournal);
 
 export default router;

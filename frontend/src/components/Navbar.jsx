@@ -29,7 +29,7 @@ import { logout } from '../slices/authSlice';
 const NAV_ITEMS = [
   {
     label: 'Meditations',
-    to:'/meditate',
+    // to:'/meditate',
     children: [
       {
         label: 'Daily Mindfulness Meditations',

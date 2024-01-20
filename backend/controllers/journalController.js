@@ -40,7 +40,19 @@ const createJournal = async (req, res) => {
     }
 }
 
+const deleteJournal = async (req, res) => {
+    try {
+      await Journal.findByIdAndDelete({_id: req.params.id});
+      console.log("Deleted journal");
+      res.json("Deletion of journal successful");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
 export {
     getJournal,
-    createJournal
+    createJournal,
+    deleteJournal
 }
