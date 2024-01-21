@@ -17,7 +17,7 @@ const Faq = () => {
       <Accordion allowToggle width={"50%"}>
         <AccordionItem>
           <h2>
-            <AccordionButton>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
                 Will Anxiety Ally ever launch as an official app?
               </Box>
@@ -33,7 +33,7 @@ const Faq = () => {
 
         <AccordionItem>
           <h2>
-            <AccordionButton>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
                 Why did you create Anxiety Ally?
               </Box>
@@ -50,7 +50,7 @@ const Faq = () => {
         </AccordionItem>
         <AccordionItem>
           <h2>
-            <AccordionButton>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
                 Who is Anxiety Ally for?
               </Box>
@@ -64,7 +64,46 @@ const Faq = () => {
         </AccordionItem>
         <AccordionItem>
           <h2>
-            <AccordionButton>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
+              <Box as="span" flex='1' textAlign='left'>
+                What is mindfulness?
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            Mindfulness is being present in the moment without judgement. It helps you become more aware, calmer and less reactive to events.
+          </AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <h2>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
+              <Box as="span" flex='1' textAlign='left'>
+                What is meditation? Do I have to sit with my legs acrossed?
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            Meditation is focusing your attention and awareness to calmness and acceptance. You do not have to sit with your legs crossed, you can find a comfortable position to sit or lay down on.
+          </AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <h2>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
+              <Box as="span" flex='1' textAlign='left'>
+                What is exposure in regards to anxiety and agoraphobia?
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            Exposure therapy is a form of therapy where you gradually exposure yourself to things that trigger your anxiety and fears, by creating a safe environment to do so.
+          </AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <h2>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
                 Is Anxiety Ally free?
               </Box>
@@ -77,7 +116,7 @@ const Faq = () => {
         </AccordionItem>
         <AccordionItem>
           <h2>
-            <AccordionButton>
+            <AccordionButton _expanded={{ bg: 'steelblue', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
                 Who created Anxiety Ally?
               </Box>
